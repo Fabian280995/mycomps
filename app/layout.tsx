@@ -2,6 +2,7 @@ import MainHeader from "@/components/main-header";
 import "./globals.css";
 import type { Metadata } from "next";
 import { Lato } from "next/font/google";
+import BottomScrollIndicator from "@/components/bottom-scroll-indicator";
 
 const lato = Lato({
   subsets: ["latin"],
@@ -21,9 +22,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={lato.className}>
+      <body className={`${lato.className} no-scrollbar`}>
         <MainHeader />
         {children}
+        <BottomScrollIndicator />
       </body>
     </html>
   );

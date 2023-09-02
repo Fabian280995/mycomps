@@ -20,7 +20,7 @@ const SportsOverview = async () => {
     <div className="w-full bg-white shadow-md my-12 py-20 px-16 space-y-8">
       <div className="flex flex-col">
         <h2 className="text-4xl font-bold text-emerald-600 mb-2">
-          Entdecke jetzt deine nächste Leidenschaft!
+          Finde deinen nächsten Wettkampf!
         </h2>
         <p className="text-gray-600 font-semibold">
           Sieh dir an, welche Sportarten wir bereits unterstützen.

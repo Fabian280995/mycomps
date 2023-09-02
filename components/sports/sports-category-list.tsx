@@ -18,15 +18,15 @@ const SportsCategoryList = ({ title, sports }: Props) => {
             key={sport.id}
           >
             <div
-              className="w-12 h-12 border border-white overflow-hidden rounded-full p-2
-            flex items-center justify-center group-hover:border-gray-400"
+              className="w-12 h-12 overflow-hidden rounded-2xl p-2
+              flex items-center justify-center"
             >
               <Image
                 src={sport.image.url}
                 width={50}
                 height={50}
                 alt={sport.name}
-                className=" object-cover object-center"
+                className="object-cover object-center"
               />
             </div>
             <p className="text-gray-700 group-hover:underline">{sport.name}</p>

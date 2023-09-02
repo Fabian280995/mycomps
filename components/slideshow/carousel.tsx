@@ -59,7 +59,7 @@ const Carousel: React.FC<Props> = ({
       </div>
       <div className="absolute inset-0 flex flex-col justify-center items-center">
         <h2 className="text-2xl sm:text-4xl mx-6 sm:mx-0 text-center font-bold text-white drop-shadow-dark">
-          Finde deinen nächsten Wettkampf!
+          Entdecke jetzt deine Leidenschaft!
         </h2>
         <button
           className="px-8 py-4 mt-4 sm:mt-8 text-white bg-emerald-600 rounded-full shadow-lg hover:bg-emerald-500
