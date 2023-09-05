@@ -68,7 +68,7 @@ const CompCard = ({ comp }: Props) => {
                 {comp.name}
               </h4>
             </div>
-            <div className="flex flex-col gap-y-1">
+            <div className="flex flex-col gap-y-2 justify-around pb-4">
               {infos.map((info, index) => (
                 <div key={index} className="flex items-center gap-x-2">
                   {info.icon}

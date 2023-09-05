@@ -11,7 +11,7 @@ export default async function HeroPage() {
   const slideshow: Slideshow = await getHeroSlideshow();
 
   return (
-    <main className="w-full flex flex-col gap-y-24">
+    <main className="w-full flex flex-col gap-y-24 mb-24">
       <Carousel autoSlideInterval={7500}>
         {slideshow.slides.map((slide) => (
           <Slide key={slide.id} slide={slide} />
@@ -19,7 +19,6 @@ export default async function HeroPage() {
       </Carousel>
       <CompsOverview />
       <SportsOverview />
-      <Footer />
     </main>
   );
 }

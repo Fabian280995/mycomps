@@ -4,30 +4,19 @@ import React, { useEffect } from "react";
 
 import { useRouter } from "next/navigation";
 import { Menu, X } from "lucide-react";
-import useWindowDimensions from "@/hooks/useWindowDimensions";
+import { routes } from "@/lib/constants";
 
-const MainHeader = () => {
-  const [isScrolled, setIsScrolled] = React.useState(true);
+interface Props {
+  main?: boolean;
+}
+
+const MainHeader = ({ main = false }: Props) => {
+  const [isScrolled, setIsScrolled] = React.useState(!main);
   const [isVisible, setIsVisible] = React.useState(true);
   const [prevScrollY, setPrevScrollY] = React.useState(0);
   const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false);
 
   const router = useRouter();
-
-  const routes = [
-    {
-      label: "Home",
-      href: "/",
-    },
-    {
-      label: "About",
-      href: "/about",
-    },
-    {
-      label: "Contact",
-      href: "/contact",
-    },
-  ];
 
   useEffect(() => {
     const handleScroll = () => {
@@ -38,11 +27,13 @@ const MainHeader = () => {
 
       if (scrollY >= 90) {
         setIsScrolled(true);
-      } else {
+      }
+
+      if (scrollY < 90 && main) {
         setIsScrolled(false);
       }
 
-      if (scrollY > prevScrollY && scrollY > 400) {
+      if (scrollY > prevScrollY && (main ? scrollY > 500 : scrollY > 0)) {
         setIsVisible(false);
       } else {
         setIsVisible(true);
@@ -52,6 +43,9 @@ const MainHeader = () => {
 
     if (mobileMenuOpen) return;
 
+    if (document.documentElement.scrollTop > 0) {
+      setIsScrolled(true);
+    }
     window.addEventListener("scroll", handleScroll);
 
     return () => {
@@ -80,7 +74,7 @@ const MainHeader = () => {
         >
           <h1
             className={`transition-all duration-500 ease-in-out font-light 
-            select-none cursor-pointer hover:text-emerald-100
+            select-none cursor-pointer 
             ${
               isScrolled
                 ? "text-gray-600 text-3xl"

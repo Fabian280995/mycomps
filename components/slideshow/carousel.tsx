@@ -60,6 +60,7 @@ const Carousel: React.FC<Props> = ({
       <div className="absolute inset-0 flex flex-col justify-center items-center">
         <h2 className="h1-white">Entdecke deine Leidenschaft!</h2>
         <button
+          type="button"
           className="px-8 py-4 mt-4 sm:mt-8 text-white bg-emerald-600 rounded-full shadow-lg hover:bg-emerald-500
           transition-all duration-200 ease-in-out"
           onClick={onGetStarted}
