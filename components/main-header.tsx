@@ -7,7 +7,7 @@ import { Menu, X } from "lucide-react";
 import useWindowDimensions from "@/hooks/useWindowDimensions";
 
 const MainHeader = () => {
-  const [isScrolled, setIsScrolled] = React.useState(false);
+  const [isScrolled, setIsScrolled] = React.useState(true);
   const [isVisible, setIsVisible] = React.useState(true);
   const [prevScrollY, setPrevScrollY] = React.useState(0);
   const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false);
@@ -31,7 +31,10 @@ const MainHeader = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      const scrollY = window.scrollY;
+      const scrollY = document.documentElement.scrollTop;
+
+      console.log("SCROLL_Y:", scrollY);
+      console.log("PREV_SCROLL_Y:", prevScrollY);
 
       if (scrollY >= 90) {
         setIsScrolled(true);
@@ -39,7 +42,7 @@ const MainHeader = () => {
         setIsScrolled(false);
       }
 
-      if (scrollY > prevScrollY && scrollY > 300) {
+      if (scrollY > prevScrollY && scrollY > 400) {
         setIsVisible(false);
       } else {
         setIsVisible(true);

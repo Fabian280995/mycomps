@@ -1,5 +1,4 @@
 "use client";
-import useWindowDimensions from "@/hooks/useWindowDimensions";
 import { ArrowBigDown } from "lucide-react";
 import React, { useEffect, useState } from "react";
 
@@ -12,22 +11,19 @@ const Carousel: React.FC<Props> = ({
   children: slides,
   autoSlideInterval = 3000,
 }) => {
+  const [windowHeight, setWindowHeight] = useState(0);
   const [current, setCurrent] = useState(0);
   const [autoSlideActive, setAutoSlideActive] = useState(true);
-
-  const { height, width } = useWindowDimensions();
 
   if (!Array.isArray(slides)) return null;
 
   let intervalId: NodeJS.Timeout;
-  /* const prev = () =>
-    setCurrent((current) => (current === 0 ? slides.length - 1 : current - 1)); */
   const next = () =>
     setCurrent((current) => (current === slides.length - 1 ? 0 : current + 1));
 
   const onGetStarted = () => {
     window.scrollTo({
-      top: height,
+      top: windowHeight,
       behavior: "smooth",
     });
   };
@@ -37,6 +33,10 @@ const Carousel: React.FC<Props> = ({
     intervalId = setInterval(next, autoSlideInterval);
     return () => clearInterval(intervalId);
   }, [autoSlideActive, autoSlideInterval]);
+
+  useEffect(() => {
+    setWindowHeight(window.innerHeight);
+  }, []);
 
   return (
     <div className="relative w-full overflow-hidden">
@@ -58,9 +58,7 @@ const Carousel: React.FC<Props> = ({
         </div>
       </div>
       <div className="absolute inset-0 flex flex-col justify-center items-center">
-        <h2 className="text-2xl sm:text-4xl mx-6 sm:mx-0 text-center font-bold text-white drop-shadow-dark">
-          Entdecke jetzt deine Leidenschaft!
-        </h2>
+        <h2 className="h1-white">Entdecke deine Leidenschaft!</h2>
         <button
           className="px-8 py-4 mt-4 sm:mt-8 text-white bg-emerald-600 rounded-full shadow-lg hover:bg-emerald-500
           transition-all duration-200 ease-in-out"

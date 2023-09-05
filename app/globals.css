@@ -25,3 +25,15 @@ body,
     scrollbar-width: none; /* Firefox */
   }
 }
+
+@layer components {
+  .h1-white {
+    @apply text-2xl sm:text-3xl md:text-4xl font-bold text-white drop-shadow-dark;
+  }
+  .h2-white {
+    @apply text-xl sm:text-2xl md:text-3xl font-bold text-white drop-shadow-dark;
+  }
+  .h2-green {
+    @apply text-xl sm:text-2xl md:text-3xl font-bold text-emerald-600;
+  }
+}

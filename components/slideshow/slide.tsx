@@ -18,6 +18,7 @@ const Slide = ({ slide }: Props) => {
         sizes="100vw"
         loading="eager"
         quality={75}
+        priority
         className="object-cover object-center"
       />
       <div className="bg-black/50 absolute inset-0" />
