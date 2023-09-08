@@ -24,7 +24,7 @@ const SportsOverview = async () => {
         subtitle="
           Sieh dir an, welche Sportarten wir bereits unterstützen."
       />
-      <div className="max-w-7xl mx-auto flex gap-6 flex-wrap justify-between">
+      <div className="flex gap-6 flex-wrap">
         {Object.keys(sportsByCategory).map((category) => (
           <SportsCategoryList
             title={categoryTranslations[category]}

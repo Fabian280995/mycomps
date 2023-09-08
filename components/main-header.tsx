@@ -65,7 +65,7 @@ const MainHeader = ({ main = false }: Props) => {
     >
       <div
         className={`flex justify-between items-center px-2 sm:px-4 md:px-8 lg:px-12 py-6
-        w-full h-[5rem] max-w-7xl mx-auto`}
+        w-full h-[5rem]`}
       >
         <div
           className={`flex w-full justify-between items-center sm:items-end transition-all duration-500 ease-in-out

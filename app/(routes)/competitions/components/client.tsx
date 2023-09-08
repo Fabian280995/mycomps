@@ -2,57 +2,42 @@
 import CompCard from "@/components/comps/comp-card";
 import FilterBar from "@/components/comps/filter-bar";
 import SectionHeader from "@/components/ui/section-header";
-import {
-  getSportsFromCompetitions,
-  getMonthsFromComps,
-} from "@/lib/functions/comp-planer";
-import { Competition, Sport } from "@/types";
-import React from "react";
+import { Competition } from "@/types";
+import React, { useState } from "react";
 
 interface Props {
   competitions: Competition[];
 }
 
 const CompetitionsClient = ({ competitions }: Props) => {
-  const sports = getSportsFromCompetitions(competitions);
-  const months = getMonthsFromComps(competitions);
-  const [selectedSports, setSelectedSports] = React.useState<Sport[]>([]);
+  const [filteredComps, setFilteredComps] = useState<string[] | null>(null);
 
-  console.log(months);
-
-  const handleSelectSport = (sport: Sport) => {
-    if (selectedSports.find((s) => s === sport)) {
-      setSelectedSports(selectedSports.filter((s) => s.id !== sport.id));
+  const handleFilteredCompsChange = (compIds: string[]) => {
+    if (compIds.length > 0) {
+      setFilteredComps(compIds);
     } else {
-      setSelectedSports([...selectedSports, sport]);
+      setFilteredComps(null);
     }
-  };
-
-  const handleReset = () => {
-    setSelectedSports([]);
   };
 
   return (
     <div className="mt-28 space-y-8 bg-white rounded-md py-20 px-16 shadow-md">
       <SectionHeader
-        title="Wettkämpfe"
-        subtitle="Alle Wettkämpfe in der Übersicht."
+        title="Der Wettkampfplaner"
+        subtitle="Willkommen im Wettkampfplaner, finde hier deinen passenden Wettkampf!
+        Verwende die Filter um alle Vorraussetzungen zu schaffen, die optimale Herausforderung für dich zu finden."
       />
       <FilterBar
-        sports={sports}
-        selectedSports={selectedSports}
-        onSelectSport={handleSelectSport}
-        onReset={handleReset}
+        competitions={competitions}
+        onFilteredCompsChange={handleFilteredCompsChange}
+        onFilterReset={() => setFilteredComps(null)}
       />
       {competitions.length ? (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
           {competitions.map((comp) => {
-            if (
-              selectedSports.length > 0 &&
-              !selectedSports.find((s) => s.id === comp.sport.id)
-            )
+            if (filteredComps && !filteredComps.find((id) => id === comp.id)) {
               return null;
-
+            }
             return <CompCard key={comp.id} comp={comp} />;
           })}
         </div>
