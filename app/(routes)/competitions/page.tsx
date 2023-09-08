@@ -13,8 +13,8 @@ export default async function CompetitionsPage() {
   const competitions: Competition[] = await getCompetitions({});
 
   return (
-    <main className="w-full flex flex-col gap-y-24 mb-24">
+    <section className="w-full flex flex-col gap-y-24 mb-24">
       <CompetitionsClient competitions={competitions} />
-    </main>
+    </section>
   );
 }

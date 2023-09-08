@@ -8,7 +8,7 @@ export default function RoutesLayout({
   children: React.ReactNode;
 }) {
   return (
-    <main className="">
+    <main>
       <MainHeader main={false} />
       {children}
       <BottomScrollIndicator />

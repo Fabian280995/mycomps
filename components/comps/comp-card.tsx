@@ -11,7 +11,6 @@ import {
 } from "lucide-react";
 import Image from "next/image";
 import React from "react";
-import { start } from "repl";
 
 interface Props {
   comp: Competition | null;
@@ -50,7 +49,7 @@ const CompCard = ({ comp }: Props) => {
     <div className="min-w-[16rem] h-full">
       {comp ? (
         <div
-          className="w-full h-full flex flex-col bg-white shadow-sm rounded-md overflow-hidden
+          className="relative w-full h-full border flex flex-col bg-white shadow-sm rounded-md overflow-hidden
         cursor-pointer hover:scale-[1.02] hover:-translate-y-1 hover:shadow-md transition-all duration-150"
         >
           <div className="relative w-full aspect-[3/2]">
@@ -77,6 +76,17 @@ const CompCard = ({ comp }: Props) => {
               ))}
             </div>
           </div>
+          {comp.sport.image?.url ? (
+            <div className="absolute bottom-2 right-2 border border-white rounded-full p-2">
+              <Image
+                src={comp.sport.image.url}
+                alt={comp.sport.name}
+                width={24}
+                height={24}
+                className="object-cover object-center"
+              />
+            </div>
+          ) : null}
         </div>
       ) : (
         <div className="relative flex items-center justify-center w-full h-full bg-white shadow-sm rounded-md overflow-hidden">

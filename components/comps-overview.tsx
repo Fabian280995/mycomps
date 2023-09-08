@@ -1,11 +1,11 @@
-import getCompetitions from "@/lib/actions/getCompetitions";
 import React from "react";
 import CompsList from "./comps/comps-list";
-import { getDateRange, getWeekDates } from "@/lib/functions/date";
+import { getDateRange } from "@/lib/functions/date";
 import SectionHeader from "./ui/section-header";
 import NavigationButton from "./ui/nav-btn";
 
 const CompsOverview = async () => {
+  const range = 30;
   const dates = getDateRange(30);
 
   return (
@@ -29,10 +29,12 @@ const CompsOverview = async () => {
         </div>
       </div>
       <div className="space-y-6">
-        <SectionHeader
-          title="Kommende Wettkämpfe"
-          subtitle="Sieh dir die Wettkämpfe der kommenden 30 Tage an."
-        />
+        <div className="px-16">
+          <SectionHeader
+            title="Kommende Wettkämpfe"
+            subtitle={`Sieh dir die Wettkämpfe der kommenden ${range} Tage an.`}
+          />
+        </div>
         <CompsList
           filter={{
             startDate: dates.start,

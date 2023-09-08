@@ -18,7 +18,7 @@ const SportsOverview = async () => {
   };
 
   return (
-    <section className="w-full bg-white shadow-md py-20 space-y-8">
+    <section className="w-full bg-white shadow-md py-20 space-y-8 px-16">
       <SectionHeader
         title="Finde deinen nächsten Wettkampf!"
         subtitle="
