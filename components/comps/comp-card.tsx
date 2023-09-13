@@ -49,7 +49,7 @@ const CompCard = ({ comp }: Props) => {
     <div className="min-w-[16rem] h-full">
       {comp ? (
         <div
-          className="relative w-full h-full border flex flex-col bg-white shadow-sm rounded-md overflow-hidden
+          className="relative w-full h-full border-2 flex flex-col bg-white shadow-sm rounded-md overflow-hidden
         cursor-pointer hover:scale-[1.02] hover:-translate-y-1 hover:shadow-md transition-all duration-150"
         >
           <div className="relative w-full aspect-[3/2]">
