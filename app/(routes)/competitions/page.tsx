@@ -26,13 +26,9 @@ export default async function CompetitionsPage({
     : competitions;
 
   return (
-    <section className="w-full flex flex-col gap-y-24 mb-24">
-      <div className="mt-28 space-y-8 bg-white rounded-md py-20 px-16 shadow-md">
-        <SectionHeader
-          title="Der Wettkampfplaner"
-          subtitle="Willkommen im Wettkampfplaner, finde hier deinen passenden Wettkampf!
-        Verwende die Filter um alle Vorraussetzungen zu schaffen, die optimale Herausforderung für dich zu finden."
-        />
+    <section className="w-full my-12">
+      <div className="flex flex-col gap-8 bg-white rounded-md py-20 px-16 shadow-md">
+        <SectionHeader title="Wettkampfplaner" />
         <NewFilterBar
           searchParams={searchParams}
           sports={sports}

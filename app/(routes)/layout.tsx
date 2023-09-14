@@ -1,6 +1,6 @@
-import MainHeader from "@/components/main-header";
 import BottomScrollIndicator from "@/components/bottom-scroll-indicator";
 import Footer from "@/components/footer";
+import StaticHeader from "@/components/static-header";
 
 export default function RoutesLayout({
   children,
@@ -8,8 +8,8 @@ export default function RoutesLayout({
   children: React.ReactNode;
 }) {
   return (
-    <main className="">
-      <MainHeader main={false} />
+    <main className="w-full">
+      <StaticHeader />
       {children}
       <BottomScrollIndicator />
       <Footer />
