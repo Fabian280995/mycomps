@@ -4,6 +4,7 @@ import getCompetitions from "@/lib/actions/getCompetitions";
 import CompetitionsClient from "./components/client";
 import NewFilterBar from "@/components/comps/new-filter-bar";
 import SectionHeader from "@/components/ui/section-header";
+import CompsTimeline from "@/components/comps-timeline";
 
 export default async function CompetitionsPage({
   searchParams,
@@ -13,7 +14,7 @@ export default async function CompetitionsPage({
   const competitions: Competition[] = await getCompetitions({});
   const sports = competitions.map((comp) => comp.sport);
 
-  const filterActive = searchParams.filterActive ? true : false;
+  /* const filterActive = searchParams.filterActive ? true : false;
   const filteredComps = filterActive
     ? competitions.filter((comp) => {
         const compSport = comp.sport.id;
@@ -23,11 +24,11 @@ export default async function CompetitionsPage({
         }
         return false;
       })
-    : competitions;
+    : competitions; */
 
   return (
-    <section className="w-full my-12">
-      <div className="flex flex-col gap-8 bg-white rounded-md py-20 px-16 shadow-md">
+    <section className="w-full">
+      {/* <div className="flex flex-col gap-8 bg-white rounded-md py-20 px-16 shadow-md">
         <SectionHeader title="Wettkampfplaner" />
         <NewFilterBar
           searchParams={searchParams}
@@ -35,7 +36,8 @@ export default async function CompetitionsPage({
           filterActive={filterActive}
         />
         <CompetitionsClient competitions={filteredComps} />
-      </div>
+      </div> */}
+      <CompsTimeline comps={competitions} />
     </section>
   );
 }

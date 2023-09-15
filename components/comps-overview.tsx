@@ -3,6 +3,7 @@ import CompsList from "./comps/comps-list";
 import { getDateRange } from "@/lib/functions/date";
 import SectionHeader from "./ui/section-header";
 import NavigationButton from "./ui/nav-btn";
+import InfoContainer from "./design/info-container";
 
 const CompsOverview = async () => {
   const range = 30;
@@ -10,7 +11,7 @@ const CompsOverview = async () => {
 
   return (
     <section className="w-full space-y-24">
-      <div className="bg-white shadow-md py-20">
+      {/* <div className="bg-white shadow-md py-20">
         <div className="flex flex-col gap-y-4 items-center px-8 md:px-12 lg:px-16 w-full">
           <h2 className="h2-green">
             Bist du bereit für deinen nächsten Wettkampf?
@@ -27,7 +28,23 @@ const CompsOverview = async () => {
             mycomps.de - dein Schlüssel zu noch mehr Erfolg!
           </p>
         </div>
-      </div>
+      </div> */}
+      <InfoContainer
+        title="
+          Bist du bereit für deinen nächsten Wettkampf?"
+      >
+        <p className="text-gray-600 font-semibold text-2xl">
+          Starte jetzt mit unserem Wettkampfplaner und hebe ab zu neuen
+          Höchstleistungen!
+        </p>
+        <NavigationButton
+          href="/competitions"
+          title="Jetzt zum Wettkampfplaner!"
+        />
+        <p className="text-gray-400 font-semibold">
+          mycomps.de - dein Schlüssel zu noch mehr Erfolg!
+        </p>
+      </InfoContainer>
       <div className="space-y-6">
         <div className="px-16">
           <SectionHeader

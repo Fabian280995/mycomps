@@ -2,6 +2,7 @@ import React from "react";
 import getSportsByCategory from "@/lib/actions/getSportsByCategories";
 import SportsCategoryList from "./sports/sports-category-list";
 import SectionHeader from "./ui/section-header";
+import InfoContainer from "./design/info-container";
 
 const SportsOverview = async () => {
   const sportsByCategory = await getSportsByCategory();
@@ -18,13 +19,8 @@ const SportsOverview = async () => {
   };
 
   return (
-    <section className="w-full bg-white shadow-md py-20 space-y-8 px-16">
-      <SectionHeader
-        title="Finde deinen nächsten Wettkampf!"
-        subtitle="
-          Sieh dir an, welche Sportarten wir bereits unterstützen."
-      />
-      <div className="flex gap-6 flex-wrap">
+    <InfoContainer title="Sieh dir an, welche Sportarten wir bereits unterstützen.">
+      <div className="flex gap-6 flex-wrap mt-8">
         {Object.keys(sportsByCategory).map((category) => (
           <SportsCategoryList
             title={categoryTranslations[category]}
@@ -33,7 +29,7 @@ const SportsOverview = async () => {
           />
         ))}
       </div>
-    </section>
+    </InfoContainer>
   );
 };
 

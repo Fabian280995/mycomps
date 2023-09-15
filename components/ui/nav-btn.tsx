@@ -15,7 +15,7 @@ const NavigationButton = ({ href, title, icon }: Props) => {
     <button
       type="button"
       className="px-8 py-4 my-4 sm:mt-8 text-white 
-      bg-emerald-600 rounded-full shadow-md hover:bg-emerald-500
+        bg-gradient-to-l from-teal-400 to-emerald-400 rounded-full shadow-sm hover:scale-105 hover:shadow-md
         transition-all duration-200 ease-in-out"
       onClick={() => router.push(href)}
     >
