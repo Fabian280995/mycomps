@@ -61,7 +61,8 @@ const Carousel: React.FC<Props> = ({
         <h2 className="h1-white">Entdecke deine Leidenschaft!</h2>
         <button
           type="button"
-          className="px-8 py-4 mt-4 sm:mt-8 text-white bg-emerald-600 rounded-full shadow-lg hover:bg-emerald-500
+          className="px-8 py-4 mt-4 sm:mt-8 text-white bg-gradient-to-r from-teal-400 to-emerald-400
+          rounded-full shadow-lg hover:bg-emerald-500
           transition-all duration-200 ease-in-out"
           onClick={onGetStarted}
         >

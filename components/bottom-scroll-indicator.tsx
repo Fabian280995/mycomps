@@ -25,7 +25,7 @@ const BottomScrollIndicator = () => {
       h-1 bg-white/20 w-full"
     >
       <div
-        className={`h-full bg-emerald-400`}
+        className={`h-full bg-teal-400`}
         style={{ width: `${scrollTop}%` }}
       />
     </div>

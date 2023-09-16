@@ -76,26 +76,22 @@ const CompsList = ({ filter }: Props) => {
       no-scrollbar snap-x snap snap-mandatory"
         ref={listRef}
       >
-        {competitions && !loading ? (
-          competitions.map((competition, index) => (
-            <div
-              className={`snap-start px-2 py-4 ${
-                index === 0
-                  ? "pl-12"
-                  : index === competitions.length - 1
-                  ? "pr-12"
-                  : ""
-              }`}
-              key={competition.id}
-            >
-              <CompCard comp={competition} />
-            </div>
-          ))
-        ) : (
-          <div className="px-2 py-4 pl-12">
-            <CompCard comp={null} />
-          </div>
-        )}
+        {competitions && !loading
+          ? competitions.map((competition, index) => (
+              <div
+                className={`snap-start px-2 py-4 ${
+                  index === 0
+                    ? "pl-12"
+                    : index === competitions.length - 1
+                    ? "pr-12"
+                    : ""
+                }`}
+                key={competition.id}
+              >
+                <CompCard comp={competition} />
+              </div>
+            ))
+          : null}
       </div>
       <div className="absolute top-1/2 left-2 md:left-6 lg:left-18 -translate-y-1/2">
         <button

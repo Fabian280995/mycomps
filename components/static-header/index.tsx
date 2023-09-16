@@ -5,18 +5,18 @@ import StaticHeaderNav from "./nav";
 const StaticHeader = () => {
   return (
     <header
-      className="flex justify-between items-center px-2 sm:px-4 md:px-8 lg:px-12 py-6
-      w-full h-[5rem] max-w-7xl mx-auto"
+      className="flex justify-between items-center padding-x py-6
+      w-full h-[5rem] border-b bg-gray-50"
     >
       <div className="flex flex-col gap-2">
         <div className="flex w-full justify-between items-center sm:items-end transition-all duration-500 ease-in-out">
           <Link href="/">
             <h1
               className="transition-all duration-500 ease-in-out font-light 
-            select-none cursor-pointer text-3xl"
+            select-none cursor-pointer text-3xl drop-shadow-md text-gray-900"
             >
               my
-              <span className="font-extrabold text-emerald-600">comps</span>
+              <span className="font-extrabold text-teal-400">comps</span>
               <span className="font-semibold text-gray-400 text-sm ml-1">
                 .de
               </span>

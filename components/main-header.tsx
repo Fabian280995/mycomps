@@ -56,7 +56,7 @@ const MainHeader = ({ main = false }: Props) => {
   return (
     <header
       className={`fixed top-0 right-0 left-0 z-50 transition-all
-      ${isScrolled && "bg-white shadow-lg"}
+      ${isScrolled && "bg-gray-50 shadow-lg"}
       ${
         isVisible
           ? "translate-y-0 pointer-events-auto"
@@ -77,14 +77,14 @@ const MainHeader = ({ main = false }: Props) => {
             select-none cursor-pointer 
             ${
               isScrolled
-                ? "text-gray-600 text-3xl"
+                ? "text-gray-900 text-3xl"
                 : "text-white drop-shadow-dark text-4xl"
             }
         `}
             onClick={() => router.push("/")}
           >
             my
-            <span className="font-extrabold text-emerald-600">comps</span>
+            <span className="font-extrabold text-teal-400">comps</span>
             <span className="font-semibold text-gray-400 text-sm ml-1">
               .de
             </span>

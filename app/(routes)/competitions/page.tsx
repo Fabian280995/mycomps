@@ -1,43 +1,46 @@
-import { Competition } from "@/types";
-
 import getCompetitions from "@/lib/actions/getCompetitions";
-import CompetitionsClient from "./components/client";
-import NewFilterBar from "@/components/comps/new-filter-bar";
-import SectionHeader from "@/components/ui/section-header";
 import CompsTimeline from "@/components/comps-timeline";
+import getSports from "@/lib/actions/getSports";
+import FilterBar from "@/components/comps-timeline/filter-bar";
+
+export interface compQueryParams {
+  page?: number;
+  sports?: string[];
+}
 
 export default async function CompetitionsPage({
   searchParams,
 }: {
   searchParams: { [key: string]: string | string[] | undefined };
 }) {
-  const competitions: Competition[] = await getCompetitions({});
-  const sports = competitions.map((comp) => comp.sport);
-
-  /* const filterActive = searchParams.filterActive ? true : false;
-  const filteredComps = filterActive
-    ? competitions.filter((comp) => {
-        const compSport = comp.sport.id;
-
-        if (searchParams.sports?.includes(compSport)) {
-          return true;
-        }
-        return false;
-      })
-    : competitions; */
+  const startDate = new Date();
+  const page = searchParams.page ? parseInt(searchParams.page as string) : 1;
+  const limit = 10;
+  const sportIds = Array.isArray(searchParams.sports)
+    ? searchParams.sports
+    : searchParams.sports
+    ? [searchParams.sports]
+    : [];
+  // competitionsPage holds the competitions and adds new, when page increases
+  const competitions = await getCompetitions({
+    page,
+    limit,
+    startDate,
+    sportIds: sportIds.length > 0 ? sportIds : undefined,
+  });
+  const sports = await getSports();
 
   return (
     <section className="w-full">
-      {/* <div className="flex flex-col gap-8 bg-white rounded-md py-20 px-16 shadow-md">
-        <SectionHeader title="Wettkampfplaner" />
-        <NewFilterBar
-          searchParams={searchParams}
-          sports={sports}
-          filterActive={filterActive}
-        />
-        <CompetitionsClient competitions={filteredComps} />
-      </div> */}
-      <CompsTimeline comps={competitions} />
+      <FilterBar sports={sports} selectedSportIds={sportIds} />
+      <CompsTimeline
+        comps={competitions}
+        selectedSportIds={sportIds}
+        query={{
+          page,
+          sports: sportIds.length > 0 ? sportIds : undefined,
+        }}
+      />
     </section>
   );
 }

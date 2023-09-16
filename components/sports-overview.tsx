@@ -19,17 +19,19 @@ const SportsOverview = async () => {
   };
 
   return (
-    <InfoContainer title="Sieh dir an, welche Sportarten wir bereits unterstützen.">
-      <div className="flex gap-6 flex-wrap mt-8">
-        {Object.keys(sportsByCategory).map((category) => (
-          <SportsCategoryList
-            title={categoryTranslations[category]}
-            sports={sportsByCategory[category]}
-            key={category}
-          />
-        ))}
-      </div>
-    </InfoContainer>
+    <div className="padding-x">
+      <InfoContainer title="Sieh dir an, welche Sportarten wir bereits unterstützen.">
+        <div className="flex gap-6 flex-wrap mt-8">
+          {Object.keys(sportsByCategory).map((category) => (
+            <SportsCategoryList
+              title={categoryTranslations[category]}
+              sports={sportsByCategory[category]}
+              key={category}
+            />
+          ))}
+        </div>
+      </InfoContainer>
+    </div>
   );
 };
 

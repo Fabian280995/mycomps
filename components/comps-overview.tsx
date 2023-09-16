@@ -29,22 +29,24 @@ const CompsOverview = async () => {
           </p>
         </div>
       </div> */}
-      <InfoContainer
-        title="
+      <div className="padding-x">
+        <InfoContainer
+          title="
           Bist du bereit für deinen nächsten Wettkampf?"
-      >
-        <p className="text-gray-600 font-semibold text-2xl">
-          Starte jetzt mit unserem Wettkampfplaner und hebe ab zu neuen
-          Höchstleistungen!
-        </p>
-        <NavigationButton
-          href="/competitions"
-          title="Jetzt zum Wettkampfplaner!"
-        />
-        <p className="text-gray-400 font-semibold">
-          mycomps.de - dein Schlüssel zu noch mehr Erfolg!
-        </p>
-      </InfoContainer>
+        >
+          <p className="text-gray-600 font-semibold text-2xl">
+            Starte jetzt mit unserem Wettkampfplaner und hebe ab zu neuen
+            Höchstleistungen!
+          </p>
+          <NavigationButton
+            href="/competitions"
+            title="Jetzt zum Wettkampfplaner!"
+          />
+          <p className="text-gray-400 font-semibold">
+            mycomps.de - dein Schlüssel zu noch mehr Erfolg!
+          </p>
+        </InfoContainer>
+      </div>
       <div className="space-y-6">
         <div className="px-16">
           <SectionHeader

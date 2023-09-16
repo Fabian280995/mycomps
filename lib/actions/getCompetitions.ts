@@ -8,7 +8,9 @@ export interface CompetitionsQuery {
   startDate?: Date;
   endDate?: Date;
   organizerId?: string;
-  sportId?: string;
+  sportIds?: string | string[];
+  page?: number;
+  limit?: number;
 }
 
 const getCompetitions = async (
@@ -23,9 +25,11 @@ const getCompetitions = async (
     query: {
       locationId: query.locationId,
       organizerId: query.organizerId,
-      sportId: query.sportId,
+      sportId: query.sportIds,
       startDate: query.startDate?.toString(),
       endDate: query.endDate?.toString(),
+      page: query.page,
+      limit: query.limit,
     },
   });
 

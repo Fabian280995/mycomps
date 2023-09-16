@@ -9,7 +9,7 @@ body,
   width: 100%;
   margin: 0;
   padding: 0;
-  background-color: #eff8f4;
+  background-color: #fefefe;
   scroll-behavior: smooth;
 }
 
@@ -23,6 +23,10 @@ body,
   .no-scrollbar {
     -ms-overflow-style: none; /* IE and Edge */
     scrollbar-width: none; /* Firefox */
+  }
+
+  .padding-x {
+    @apply px-6 sm:px-8 md:px-12 lg:px-16 xl:px-24;
   }
 }
 
