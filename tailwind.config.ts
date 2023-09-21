@@ -18,6 +18,9 @@ const config: Config = {
         dark: "0 2px 3px rgb(0 0 0 / 0.7)",
         "dark-sm": "0 1px 2px rgb(0 0 0 / 0.7)",
       },
+      boxShadow: {
+        dark: "0 2px 3px rgb(0 0 0 / 0.7)",
+      },
     },
   },
   plugins: [],

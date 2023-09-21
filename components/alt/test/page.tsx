@@ -1,16 +1,14 @@
 import React from "react";
+import TestClient from "./components/client";
+import FilterBar from "./components/filter-bar";
 import getSports from "@/lib/actions/getSports";
-
-import FilterBar from "@/components/filter-bar/filter-bar";
-import CompetitionsList from "@/components/comps/comps-list";
-import Link from "next/link";
 
 export interface compQueryParams {
   startDate?: Date;
   sportId?: string;
 }
 
-const CompetitionsOverview = async ({
+const TestPage = async ({
   searchParams,
 }: {
   searchParams: { [key: string]: string | string[] | undefined };
@@ -23,9 +21,8 @@ const CompetitionsOverview = async ({
     ? new Date(searchParams.startDate as string)
     : new Date();
   startDate.setHours(0, 0, 0, 0);
-
   return (
-    <div className="min-h-screen">
+    <div>
       <FilterBar
         sports={sports}
         query={{
@@ -33,7 +30,7 @@ const CompetitionsOverview = async ({
           sportId,
         }}
       />
-      <CompetitionsList
+      <TestClient
         query={{
           startDate,
           sportId,
@@ -43,4 +40,4 @@ const CompetitionsOverview = async ({
   );
 };
 
-export default CompetitionsOverview;
+export default TestPage;

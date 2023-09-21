@@ -1,6 +1,5 @@
 "use client";
-import { useSlideshow } from "@/hooks/use-slideshow";
-import { ArrowBigDown, ArrowBigUp } from "lucide-react";
+import { ArrowBigDown } from "lucide-react";
 import React, { useEffect, useState } from "react";
 
 interface Props {
@@ -15,19 +14,18 @@ const Carousel: React.FC<Props> = ({
   const [windowHeight, setWindowHeight] = useState(0);
   const [current, setCurrent] = useState(0);
   const [autoSlideActive, setAutoSlideActive] = useState(true);
-  const { onClose } = useSlideshow((state) => ({ onClose: state.onClose }));
 
   if (!Array.isArray(slides)) return null;
 
   let intervalId: NodeJS.Timeout;
   const next = () =>
     setCurrent((current) => (current === slides.length - 1 ? 0 : current + 1));
-  const prev = () =>
-    setCurrent((current) => (current === 0 ? slides.length - 1 : current - 1));
 
   const onGetStarted = () => {
-    setAutoSlideActive(false);
-    onClose();
+    window.scrollTo({
+      top: windowHeight,
+      behavior: "smooth",
+    });
   };
 
   useEffect(() => {
@@ -72,7 +70,7 @@ const Carousel: React.FC<Props> = ({
         </button>
       </div>
       <div className="absolute bottom-4 left-0 right-0 flex w-full justify-center">
-        <ArrowBigUp className="w-8 h-8 text-white/60 animate-bounce" />
+        <ArrowBigDown className="w-8 h-8 text-white/60 animate-bounce" />
       </div>
     </div>
   );

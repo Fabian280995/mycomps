@@ -1,3 +1,4 @@
+import { TanstackProvider } from "@/providers/query-client.provider";
 import "./globals.css";
 import type { Metadata } from "next";
 import { Lato } from "next/font/google";
@@ -20,7 +21,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${lato.className} no-scrollbar`}>{children}</body>
+      <body className={`${lato.className} no-scrollbar`}>
+        <TanstackProvider>{children}</TanstackProvider>
+      </body>
     </html>
   );
 }

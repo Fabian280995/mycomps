@@ -15,7 +15,12 @@ export interface CompetitionsQuery {
 
 const getCompetitions = async (
   query: CompetitionsQuery
-): Promise<Competition[]> => {
+): Promise<{
+  pagination: {
+    total: number;
+  };
+  data: Competition[];
+}> => {
   const options = {
     method: "GET",
   };

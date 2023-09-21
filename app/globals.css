@@ -28,6 +28,9 @@ body,
   .padding-x {
     @apply px-6 sm:px-8 md:px-12 lg:px-16 xl:px-24;
   }
+  .polygon-path {
+    clip-path: polygon(0% 0%, 100% 0%, 100% 90%, 0% 100%);
+  }
 }
 
 @layer components {

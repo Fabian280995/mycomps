@@ -33,7 +33,7 @@ const MainHeader = ({ main = false }: Props) => {
         setIsScrolled(false);
       }
 
-      if (scrollY > prevScrollY && (main ? scrollY > 10 : scrollY > 0)) {
+      if (scrollY > prevScrollY && (main ? scrollY > 500 : scrollY > 0)) {
         setIsVisible(false);
       } else {
         setIsVisible(true);
@@ -53,34 +53,33 @@ const MainHeader = ({ main = false }: Props) => {
     };
   }, [prevScrollY, mobileMenuOpen]);
 
-  useEffect(() => {
-    if (isVisible && document.documentElement.scrollTop > 90)
-      setTimeout(() => {
-        setIsVisible(false);
-      }, 3000);
-  }, [isVisible]);
-
   return (
     <header
-      className={`sticky top-0 right-0 left-0 z-50 transition-all bg-white
-      ${isScrolled && "shadow-md"}
+      className={`fixed top-0 right-0 left-0 z-50 transition-all
+      ${isScrolled && "bg-white"}
       ${
-        isVisible
+        isVisible /* 
           ? "translate-y-0 pointer-events-auto"
-          : "-translate-y-[100%] pointer-events-none"
+          : "-translate-y-[100%] pointer-events-none" */
       }`}
     >
       <div
-        className={`flex justify-between items-center padding-x py-6
+        className={`flex justify-between items-center px-2 sm:px-4 md:px-8 lg:px-12 py-6
         w-full h-[5rem]`}
       >
         <div
           className={`flex w-full justify-between items-center sm:items-end transition-all duration-500 ease-in-out
+          ${!isScrolled && "translate-y-[110%] px-4 md:px-8"}
         `}
         >
           <h1
             className={`transition-all duration-500 ease-in-out font-light 
-            select-none cursor-pointer "text-gray-900 text-3xl
+            select-none cursor-pointer 
+            ${
+              isScrolled
+                ? "text-gray-900 text-3xl"
+                : "text-white drop-shadow-dark text-4xl"
+            }
         `}
             onClick={() => router.push("/")}
           >
@@ -98,7 +97,12 @@ const MainHeader = ({ main = false }: Props) => {
                     href={route.href}
                     className={`relative transition-all duration-500 ease-in-out
                     before:absolute before:bottom-0 before:left-0 before:w-0 before:h-0.5 before:bg-teal-400
-                    before:transition-all before:duration-200 before:ease-in-out hover:before:w-full text-xl text-gray-600
+                    before:transition-all before:duration-200 before:ease-in-out hover:before:w-full text-xl
+                    ${
+                      isScrolled
+                        ? "text-gray-600"
+                        : "text-white drop-shadow-dark "
+                    }
                   `}
                   >
                     {route.label}

@@ -1,24 +1,19 @@
-import { Slideshow } from "@/types";
-
+import CompetitionsOverview from "@/components/comps-overview";
+import Slideshow from "@/components/slideshow";
+import ScrollUp from "@/components/ui/scroll-up";
 import getHeroSlideshow from "@/lib/actions/getSlideshows";
-import Carousel from "@/components/slideshow/carousel";
-import Slide from "@/components/slideshow/slide";
-import SportsOverview from "@/components/sports-overview";
-import Footer from "@/components/footer";
-import CompsOverview from "@/components/comps-overview";
 
-export default async function HeroPage() {
-  const slideshow: Slideshow = await getHeroSlideshow();
-
+export default async function HeroPage({
+  searchParams,
+}: {
+  searchParams: { [key: string]: string | string[] | undefined };
+}) {
+  const slideshow = await getHeroSlideshow();
   return (
-    <main className="w-full flex flex-col gap-y-24 mb-24">
-      <Carousel autoSlideInterval={7500}>
-        {slideshow.slides.map((slide) => (
-          <Slide key={slide.id} slide={slide} />
-        ))}
-      </Carousel>
-      <CompsOverview />
-      <SportsOverview />
+    <main className="w-full flex flex-col gap-y-4">
+      <Slideshow slideshow={slideshow} />
+      <CompetitionsOverview searchParams={searchParams} />
+      <ScrollUp />
     </main>
   );
 }

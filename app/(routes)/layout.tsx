@@ -8,9 +8,9 @@ export default function RoutesLayout({
   children: React.ReactNode;
 }) {
   return (
-    <main className="w-full">
+    <main className="w-full h-full flex flex-col">
       <StaticHeader />
-      {children}
+      <div className="flex-1">{children}</div>
       <BottomScrollIndicator />
       <Footer />
     </main>

@@ -21,7 +21,7 @@ const CompCard = ({ comp }: Props) => {
   return (
     <div className="w-full h-full max-w-xs">
       <div
-        className="relative w-full h-full flex flex-col bg-white shadow-md rounded-md overflow-hidden
+        className="relative w-full h-full flex flex-col bg-white shadow-md rounded-none overflow-hidden
         cursor-pointer hover:scale-[1.02] hover:-translate-y-2 hover:shadow-lg transition-all duration-150"
       >
         <div className="relative w-full aspect-[3/2] overflow-hidden bg-gray-200">
@@ -31,19 +31,19 @@ const CompCard = ({ comp }: Props) => {
             fill
             sizes="100%"
             className={cn(
-              "object-cover object-center transition-all duration-1000 ease-in-out",
+              "object-cover object-center transition-all duration-500 ease-in-out",
               loading ? "blur-2xl scale-110" : "blur-0 scale-100"
             )}
             onLoadingComplete={() => setLoading(false)}
           />
         </div>
-        <div className="px-4 py-2 space-y-2 flex flex-col">
+        <div className="px-4 py-2 flex flex-col space-y-2">
           <div className="flex">
             <h4 className="text-lg font-semibold text-zinc-800 truncate">
               {comp.name}
             </h4>
           </div>
-          <div className="flex flex-col gap-y-2 justify-around pb-4">
+          <div className="flex flex-col gap-y-2 justify-around">
             <a
               href={organizerLink}
               className="flex items-center gap-x-2 hover:underline text-gray-500 hover:text-gray-900"
@@ -69,13 +69,22 @@ const CompCard = ({ comp }: Props) => {
               <p className="text-md truncate">{date}</p>
             </div>
           </div>
-          {true ? (
-            <button className="bg-teal-400 rounded-md hover:bg-teal-500 transition-all duration-150 px-4 py-2">
+          {comp.enrollmentLink ? (
+            <a
+              href={comp.enrollmentLink}
+              className="bg-teal-400 rounded-md hover:bg-teal-500 transition-all duration-150 px-4 py-2 text-center"
+            >
               <p className="text-white font-semibold text-xs">
-                direkt einschreinben!
+                direkt einschreiben!
               </p>
-            </button>
-          ) : null}
+            </a>
+          ) : (
+            <div className="bg-gray-50 rounded-md px-4 py-2 text-center">
+              <p className="text-gray-400 font-semibold text-xs">
+                kein Link zur Einschreibung verfügbar
+              </p>
+            </div>
+          )}
         </div>
         {false ? (
           <div className="absolute top-2 left-2 rounded-full p-2">
@@ -83,19 +92,14 @@ const CompCard = ({ comp }: Props) => {
           </div>
         ) : null}
         {comp.sport.image?.url ? (
-          <div
-            className="absolute top-2 right-2 bg-gradient-to-tr from-purple-400 to-teal-400
-            p-0.5 overflow-hidden rounded-full"
-          >
-            <div className="bg-white rounded-full p-2">
-              <Image
-                src={comp.sport.image.url}
-                alt={comp.sport.name}
-                width={24}
-                height={24}
-                className="object-cover object-center"
-              />
-            </div>
+          <div className="bg-white rounded-full p-2 absolute top-2 left-2 border-teal-400 border">
+            <Image
+              src={comp.sport.image.url}
+              alt={comp.sport.name}
+              width={24}
+              height={24}
+              className="object-cover object-center"
+            />
           </div>
         ) : null}
       </div>

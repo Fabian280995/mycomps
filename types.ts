@@ -20,6 +20,7 @@ export interface Competition {
   sport: Sport;
   organizer: Organizer;
   startDate: Date;
+  enrollmentLink: string;
   endDate: Date;
   createdAt: string;
 }
