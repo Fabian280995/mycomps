@@ -16,7 +16,7 @@ const StaticHeaderNav = () => {
                 href={route.href}
                 className="relative transition-all duration-500 ease-in-out
                 before:absolute before:bottom-0 before:left-0 before:w-0 before:h-0.5 before:bg-teal-400
-                before:transition-all before:duration-200 before:ease-in-out hover:before:w-full text-xl"
+                before:transition-all before:duration-200 before:ease-in-out hover:before:w-full text-2xl"
               >
                 {route.label}
               </Link>
@@ -50,9 +50,9 @@ const StaticHeaderNav = () => {
                 <li key={route.href}>
                   <Link
                     href={route.href}
-                    className={`relative transition-all duration-500 ease-in-out text-gray-800 text-2xl font-semibold
+                    className={`relative transition-all duration-500 ease-in-out text-gray-800 text-xl font-semibold
                     before:absolute before:bottom-0 before:left-0 before:w-0 before:h-0.5 before:bg-emerald-600
-                    before:transition-all before:duration-200 before:ease-in-out hover:before:w-full text-xl"text-gray-600"
+                    before:transition-all before:duration-200 before:ease-in-out hover:before:w-full text-gray-600"
                     }`}
                   >
                     {route.label}

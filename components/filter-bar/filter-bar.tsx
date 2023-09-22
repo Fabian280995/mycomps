@@ -11,7 +11,7 @@ interface Props {
   query: compQueryParams;
 }
 
-const LINK_PATHNAME = "/";
+const LINK_PATHNAME = "/home";
 const LINK_WIDTH = 6;
 
 const FilterBar = ({ sports, query }: Props) => {
@@ -31,7 +31,7 @@ const FilterBar = ({ sports, query }: Props) => {
       className="flex items-center justify-between gap-6 padding-x sticky top-0 z-40 border-b
         border-b-gray-400 bg-white shadow-md"
     >
-      <ul className="relative flex overflow-x-scroll overflow-y-hidden no-scrollbar flex-1 pt-6 pb-8">
+      <ul className="relative flex overflow-x-scroll overflow-y-hidden no-scrollbar flex-1 pt-4 pb-8">
         {sportsSortedByName.map((sport) => {
           const isSelected = query.sportId === sport.id;
           return (
@@ -87,7 +87,7 @@ const FilterBar = ({ sports, query }: Props) => {
         className="absolute bottom-0 left-0 right-0 w-full padding-x
       translate-y-1/2"
       >
-        <SearchBar query={query} />
+        <SearchBar />
       </div>
     </div>
   );

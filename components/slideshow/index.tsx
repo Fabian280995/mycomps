@@ -29,7 +29,7 @@ const Slideshow = ({ slideshow }: SlideshowProps) => {
   }, []);
 
   return (
-    <section className="w-full transform h-[80vh] padding-x overflow-hidden">
+    <section className="w-full transform h-screen padding-x overflow-hidden">
       <div className="relative h-full flex max-md:flex-col w-full items-center justify-center p-4 gap-8">
         <div className="w-full max-md:mt-6 flex flex-col justify-center z-20">
           <h2

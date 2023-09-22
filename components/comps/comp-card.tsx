@@ -92,7 +92,7 @@ const CompCard = ({ comp }: Props) => {
           </div>
         ) : null}
         {comp.sport.image?.url ? (
-          <div className="bg-white rounded-full p-2 absolute top-2 left-2 border-teal-400 border">
+          <div className="bg-white rounded-full p-2 absolute top-2 right-2 border-teal-400 border">
             <Image
               src={comp.sport.image.url}
               alt={comp.sport.name}

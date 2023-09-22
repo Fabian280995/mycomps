@@ -1,7 +1,11 @@
 "use client";
-import React, { use, useEffect } from "react";
-import { compQueryParams } from "../comps-overview";
-import { Grip, LucideRefreshCcw, RefreshCcwDot, Search } from "lucide-react";
+import React, { useEffect } from "react";
+import {
+  Grip,
+  LucideRefreshCcw,
+  Search,
+  SlidersHorizontal,
+} from "lucide-react";
 import Link from "next/link";
 import useDebounce from "@/hooks/use-debounce";
 import { useRouter } from "next/navigation";
@@ -9,11 +13,10 @@ import { cn } from "@/lib/cn";
 
 interface Props {
   searchTerm?: string;
-  query: compQueryParams;
 }
-const LINK_PATHNAME = "/";
+const LINK_PATHNAME = "/home";
 
-const SearchBar = ({ searchTerm, query }: Props) => {
+const SearchBar = ({ searchTerm }: Props) => {
   const [searchValue, setSearchValue] = React.useState(searchTerm ?? "");
   const debouncedSearchTerm = useDebounce(searchValue, 1000);
 
@@ -36,12 +39,10 @@ const SearchBar = ({ searchTerm, query }: Props) => {
         <button
           type="button"
           className="min-w-[3rem] h-[3rem] flex items-center justify-center bg-white border border-gray-400 overflow-hidden
-      rounded-full  transition-all hover:scale-105 hover:shadow-md active:scale-95 shadow-md"
-          onClick={() => {
-            window.location.href = `/comps?search=${searchValue}`;
-          }}
+          rounded-full  transition-all hover:scale-105 hover:shadow-md active:scale-95 shadow-md"
+          onClick={() => null}
         >
-          <Grip className="w-6 h-6 text-gray-400" />
+          <SlidersHorizontal className="w-5 h-5 text-gray-400" />
         </button>
         <form
           onSubmit={onSubmit}

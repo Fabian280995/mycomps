@@ -131,9 +131,9 @@ const CompetitionsList = ({ query: { sportId, startDate } }: Props) => {
   }, [data]);
 
   return (
-    <>
+    <div className="my-36 space-y-24">
       {startDate && canLoadPreviousComps ? (
-        <div className="w-full flex justify-center mt-24">
+        <div className="w-full flex justify-center">
           <Link
             href={{
               pathname: "/",
@@ -159,46 +159,44 @@ const CompetitionsList = ({ query: { sportId, startDate } }: Props) => {
           </Link>
         </div>
       ) : null}
-      <div className="py-6">
+      <div>
         {compsByMonth &&
           Object.keys(compsByMonth).map((month) => {
             if (!compsByMonth[month].length) {
               return null;
             }
             return (
-              <div key={month} className="mt-12">
+              <section key={month}>
                 <MonthIndicator month={month} />
-                <section className="w-full flex justify-center">
-                  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-6 py-6 padding-x">
-                    {compsByMonth[month].map((comp) => {
-                      if (lastCompId === comp.id) {
-                        return (
-                          <div ref={ref} key={comp.id}>
-                            <CompCard comp={comp} />
-                          </div>
-                        );
-                      }
-                      return <CompCard key={comp.id} comp={comp} />;
-                    })}
-                  </div>
-                </section>
-              </div>
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-6 py-6 padding-x">
+                  {compsByMonth[month].map((comp) => {
+                    if (lastCompId === comp.id) {
+                      return (
+                        <div ref={ref} key={comp.id}>
+                          <CompCard comp={comp} />
+                        </div>
+                      );
+                    }
+                    return <CompCard key={comp.id} comp={comp} />;
+                  })}
+                </div>
+              </section>
             );
           })}
-        {!canNextPage ? (
-          <div className="w-full flex justify-center mt-12">
-            <div
-              className="bg-gradient-to-r from-gray-400 to bg-teal-400 p-0.5 overflow-hidden
+      </div>
+      {!canNextPage ? (
+        <div className="w-full flex justify-center mt-12">
+          <div
+            className="bg-gradient-to-r from-gray-400 to bg-teal-400 p-0.5 overflow-hidden
           rounded-full scale-95"
-            >
-              <div className="w-full bg-white rounded-full px-6 py-3 text-gray-400">
-                Du bist am Ende angekommen!
-              </div>
+          >
+            <div className="w-full bg-white rounded-full px-6 py-3 text-gray-400">
+              Du bist am Ende angekommen!
             </div>
           </div>
-        ) : null}
-      </div>
-    </>
+        </div>
+      ) : null}
+    </div>
   );
 };
 

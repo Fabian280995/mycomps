@@ -6,14 +6,14 @@ const StaticHeader = () => {
   return (
     <header
       className="flex justify-between items-center padding-x py-6
-      w-full h-[5rem] bg-white"
+      w-full h-[5rem] bg-white absolute top-0 z-50"
     >
       <div className="flex flex-col gap-2">
         <div className="flex w-full justify-between items-center sm:items-end transition-all duration-500 ease-in-out">
           <Link href="/">
             <h1
               className="transition-all duration-500 ease-in-out font-light 
-            select-none cursor-pointer text-3xl drop-shadow-md text-gray-900"
+            select-none cursor-pointer text-4xl drop-shadow-md text-gray-900"
             >
               my
               <span className="font-extrabold text-teal-400">comps</span>
