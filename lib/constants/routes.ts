@@ -1,7 +1,7 @@
 export const routes = [
   {
     label: "Home",
-    href: "/",
+    href: "/home",
   },
   {
     label: "About",

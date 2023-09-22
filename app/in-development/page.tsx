@@ -3,7 +3,10 @@ import React from "react";
 
 const InDevelopmentPage = () => {
   return (
-    <div className="w-screen h-screen flex flex-col justify-center max-w-5xl padding-x mx-auto">
+    <div
+      className="w-screen h-screen flex flex-col justify-center max-w-2xl md:max-w-3xl xl:max-w-5xl padding-x mx-auto py-6
+    overflow-y-auto no-scrollbar"
+    >
       <h1 className="text-6xl font-bold text-teal-400 drop-shadow-md">
         Willkommen bei mycomps.de!
       </h1>
@@ -43,7 +46,6 @@ const InDevelopmentPage = () => {
             Mit dem Besuch der Seite erklärst du dich mit der Nutzung von
             Cookies einverstanden.
           </p>
-          <br />
           <Link
             href="/cookie-policies"
             className="text-gray-400 hover:underline text-base"
