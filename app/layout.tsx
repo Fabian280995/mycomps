@@ -22,13 +22,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <>
-      <html lang="en">
-        <body className={`${lato.className} no-scrollbar`}>
-          <TanstackProvider>{children}</TanstackProvider>
-        </body>
-      </html>
-      <Analytics />
-    </>
+    <html lang="en">
+      <body className={`${lato.className} no-scrollbar`}>
+        <TanstackProvider>{children}</TanstackProvider>
+        <Analytics />
+      </body>
+    </html>
   );
 }
