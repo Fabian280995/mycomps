@@ -4,10 +4,10 @@ import React from "react";
 const InDevelopmentPage = () => {
   return (
     <div
-      className="w-screen h-screen flex flex-col justify-center max-w-2xl md:max-w-3xl xl:max-w-5xl padding-x mx-auto py-6
+      className="w-screen h-screen flex flex-col justify-center max-w-5xl padding-x mx-auto py-6
     overflow-y-auto no-scrollbar"
     >
-      <h1 className="text-6xl font-bold text-teal-400 drop-shadow-md">
+      <h1 className="text-2xl md:text-4xl xl:text-6xl font-bold text-teal-400 drop-shadow-md">
         Willkommen bei mycomps.de!
       </h1>
       <br />
