@@ -3,6 +3,7 @@ import "./globals.css";
 import type { Metadata } from "next";
 import { Lato } from "next/font/google";
 import { redirect } from "next/navigation";
+import { Analytics } from "@vercel/analytics/react";
 
 const lato = Lato({
   subsets: ["latin"],
@@ -21,10 +22,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body className={`${lato.className} no-scrollbar`}>
-        <TanstackProvider>{children}</TanstackProvider>
-      </body>
-    </html>
+    <>
+      <html lang="en">
+        <body className={`${lato.className} no-scrollbar`}>
+          <TanstackProvider>{children}</TanstackProvider>
+        </body>
+      </html>
+      <Analytics />
+    </>
   );
 }
