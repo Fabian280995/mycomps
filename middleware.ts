@@ -3,8 +3,8 @@ import type { NextRequest } from "next/server";
 
 // This function can be marked `async` if using `await` inside
 export function middleware(request: NextRequest) {
-  console.log("middleware", request.nextUrl.pathname);
-  if (request.nextUrl.pathname.endsWith("/")) {
+  const regex = new RegExp("^/$");
+  if (regex.test(request.nextUrl.pathname)) {
     return NextResponse.redirect(new URL("/in-development", request.nextUrl), {
       status: 302,
     });

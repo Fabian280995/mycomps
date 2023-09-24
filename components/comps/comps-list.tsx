@@ -8,7 +8,9 @@ import queryString from "query-string";
 import MonthIndicator from "@/components/comps/month-indicator";
 import { compQueryParams } from "@/components/comps-overview";
 import Link from "next/link";
-import { Loader } from "lucide-react";
+import { Loader, Loader2 } from "lucide-react";
+import { sortCompsByMonth } from "@/lib/functions/sortComps";
+import { motion } from "framer-motion";
 
 const PAGE_LIMIT = 12;
 
@@ -40,46 +42,12 @@ interface Props {
   query: compQueryParams;
 }
 
-const sortCompsByMonth = (comps: Competition[]) => {
-  let compsByMonth: { [key: string]: Competition[] } = {};
-  const allMonths = [
-    "Januar",
-    "Februar",
-    "März",
-    "April",
-    "Mai",
-    "Juni",
-    "Juli",
-    "August",
-    "September",
-    "Oktober",
-    "November",
-    "Dezember",
-  ];
-
-  compsByMonth = allMonths.reduce((acc, month) => {
-    const monthComps = comps.filter(
-      (comp) =>
-        new Date(comp.startDate).toLocaleString("de-DE", {
-          month: "long",
-        }) === month
-    );
-    return {
-      ...acc,
-      [month]: monthComps,
-    };
-  }, {} as { [key: string]: Competition[] });
-
-  return compsByMonth;
-};
-
 const CompetitionsList = ({ query: { sportId, startDate } }: Props) => {
   const [compsByMonth, setCompsByMonth] = React.useState<
     { [key: string]: Competition[] } | undefined
   >(undefined);
   const [lastCompId, setLastCompId] = React.useState<string | null>(null);
   const [canNextPage, setCanNextPage] = React.useState(true);
-  const [canLoadPreviousComps, setCanLoadPreviousComps] = React.useState(true);
 
   const {
     data,
@@ -122,53 +90,31 @@ const CompetitionsList = ({ query: { sportId, startDate } }: Props) => {
     setCanNextPage(
       _comps.length < data.pages[data.pages.length - 1].pagination.total
     );
-    setCanLoadPreviousComps(
-      data.pages[data.pages.length - 1].pagination.previous > 0
-    );
-
     setLastCompId(_comps[_comps.length - 1].id);
     setCompsByMonth(sortCompsByMonth(_comps));
   }, [data]);
 
   return (
-    <div className="my-36 space-y-24">
-      {startDate && canLoadPreviousComps ? (
-        <div className="w-full flex justify-center">
-          <Link
-            href={{
-              pathname: "/",
-              query: {
-                sportId,
-                startDate: new Date(
-                  startDate.getTime() - 7 * 24 * 60 * 60 * 1000
-                ).toISOString(),
-              },
-            }}
-            scroll={false}
-            type="button"
-            className="bg-teal-400 p-0.5 overflow-hidden
-            rounded-full shadow-sm transition-all hover:scale-105 hover:shadow-md active:scale-95"
-          >
-            <div className="w-full bg-white rounded-full px-6 py-3">
-              {loading ? (
-                <Loader className="w-6 h-6 text-gray-700 animate-spin" />
-              ) : (
-                "Frühere Wettkämpfe laden"
-              )}
-            </div>
-          </Link>
-        </div>
-      ) : null}
+    <div className="my-12 space-y-24">
       <div>
+        {loading && (
+          <motion.div
+            layout
+            className="w-full flex flex-col items-center justify-center mt-12 mb-6"
+          >
+            <Loader size={24} className="animate-spin text-gray-300" />
+            <p className="text-sm text-gray-300">suche nach Änderungen...</p>
+          </motion.div>
+        )}
         {compsByMonth &&
           Object.keys(compsByMonth).map((month) => {
             if (!compsByMonth[month].length) {
               return null;
             }
             return (
-              <section key={month}>
+              <motion.section layout key={month} className="padding-x">
                 <MonthIndicator month={month} />
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-6 py-6 padding-x">
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-6 py-6">
                   {compsByMonth[month].map((comp) => {
                     if (lastCompId === comp.id) {
                       return (
@@ -180,19 +126,14 @@ const CompetitionsList = ({ query: { sportId, startDate } }: Props) => {
                     return <CompCard key={comp.id} comp={comp} />;
                   })}
                 </div>
-              </section>
+              </motion.section>
             );
           })}
       </div>
       {!canNextPage ? (
         <div className="w-full flex justify-center mt-12">
-          <div
-            className="bg-gradient-to-r from-gray-400 to bg-teal-400 p-0.5 overflow-hidden
-          rounded-full scale-95"
-          >
-            <div className="w-full bg-white rounded-full px-6 py-3 text-gray-400">
-              Du bist am Ende angekommen!
-            </div>
+          <div className="bg-white rounded-full px-6 py-3 text-gray-400">
+            Du bist am Ende angekommen!
           </div>
         </div>
       ) : null}

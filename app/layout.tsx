@@ -2,7 +2,6 @@ import { TanstackProvider } from "@/providers/query-client.provider";
 import "./globals.css";
 import type { Metadata } from "next";
 import { Lato } from "next/font/google";
-import { redirect } from "next/navigation";
 import { Analytics } from "@vercel/analytics/react";
 
 const lato = Lato({

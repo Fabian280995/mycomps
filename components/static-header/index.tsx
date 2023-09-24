@@ -6,7 +6,7 @@ const StaticHeader = () => {
   return (
     <header
       className="flex justify-between items-center padding-x py-6
-      w-full h-[5rem] bg-white absolute top-0 z-50"
+      w-full h-[5rem] bg-white"
     >
       <div className="flex flex-col gap-2">
         <div className="flex w-full justify-between items-center sm:items-end transition-all duration-500 ease-in-out">

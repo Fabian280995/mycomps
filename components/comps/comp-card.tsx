@@ -1,7 +1,7 @@
 "use client";
-import { cn } from "@/lib/cn";
+import { cn } from "@/lib/utils";
 import { Competition } from "@/types";
-import { Calendar, Flame, FlameIcon, MapPin, User2 } from "lucide-react";
+import { Calendar, Flame, MapPin, User2 } from "lucide-react";
 import Image from "next/image";
 import React from "react";
 
@@ -21,7 +21,7 @@ const CompCard = ({ comp }: Props) => {
   return (
     <div className="w-full h-full max-w-xs">
       <div
-        className="relative w-full h-full flex flex-col bg-white shadow-md rounded-none overflow-hidden
+        className="relative w-full h-full flex flex-col bg-white shadow-md rounded-3xl overflow-hidden
         cursor-pointer hover:scale-[1.02] hover:-translate-y-2 hover:shadow-lg transition-all duration-150"
       >
         <div className="relative w-full aspect-[3/2] overflow-hidden bg-gray-200">

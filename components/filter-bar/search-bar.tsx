@@ -9,7 +9,7 @@ import {
 import Link from "next/link";
 import useDebounce from "@/hooks/use-debounce";
 import { useRouter } from "next/navigation";
-import { cn } from "@/lib/cn";
+import { cn } from "@/lib/utils";
 
 interface Props {
   searchTerm?: string;
@@ -29,7 +29,7 @@ const SearchBar = ({ searchTerm }: Props) => {
 
   useEffect(() => {
     if (debouncedSearchTerm) {
-      router.push(`?$searchTerm=${debouncedSearchTerm}`, { scroll: false });
+      router.push(`?$search=${debouncedSearchTerm}`, { scroll: false });
     }
   }, [debouncedSearchTerm]);
 

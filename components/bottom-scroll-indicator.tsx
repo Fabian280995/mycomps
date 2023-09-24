@@ -21,7 +21,7 @@ const BottomScrollIndicator = () => {
 
   return (
     <div
-      className="sticky bottom-0 left-o right-0 z-50
+      className="sticky bottom-0 left-o right-0 z-30
       h-1 bg-white/20 w-full"
     >
       <div

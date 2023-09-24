@@ -3,7 +3,6 @@ import getSports from "@/lib/actions/getSports";
 
 import FilterBar from "@/components/filter-bar/filter-bar";
 import CompetitionsList from "@/components/comps/comps-list";
-import Link from "next/link";
 
 export interface compQueryParams {
   startDate?: Date;
