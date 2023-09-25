@@ -66,6 +66,7 @@ const SearchBar = ({ searchTerm }: Props) => {
         </form>
       </div>
       <Link
+        prefetch={false}
         scroll={false}
         href={{
           pathname: LINK_PATHNAME,

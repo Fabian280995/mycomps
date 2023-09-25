@@ -63,7 +63,6 @@ const CompetitionsList = ({
         page: pageParam,
         query: { sportId, startDate, searchTerm },
       });
-      console.log("RESPONSE", response);
       return response;
     },
     {

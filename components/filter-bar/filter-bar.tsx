@@ -56,7 +56,7 @@ const FilterBar = ({ sports, query }: Props) => {
                 }}
                 scroll={false}
                 className="text-center items-center"
-                replace
+                prefetch={false}
               >
                 <Image
                   src={sport.image.url}
