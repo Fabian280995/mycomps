@@ -39,8 +39,8 @@ const CompCard = ({ comp }: Props) => {
           {comp.logo.creatorLink ? (
             <a
               href={comp.logo.creatorLink}
-              className="absolute bottom-2 right-2 w-full p-2 
-               truncate text-white"
+              className="absolute bottom-0 right-0 left-0 w-full px-4 py-2 
+               truncate text-white/5 group-hover:text-white/70 transition-all duration-150"
             >
               Creator: {comp.logo.creatorLink}
             </a>
