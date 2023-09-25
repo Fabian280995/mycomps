@@ -21,7 +21,7 @@ const getCompetitions = async ({
   query: compQueryParams;
 }) => {
   const url = queryString.stringifyUrl({
-    url: "http://localhost:3001/api/competitions" /* "https://mycomps-cms.vercel.app/api/competitions" */,
+    url: "https://mycomps-cms.vercel.app/api/competitions",
     query: {
       page,
       sportId: query.sportId,
