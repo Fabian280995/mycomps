@@ -56,6 +56,7 @@ const FilterBar = ({ sports, query }: Props) => {
                 }}
                 scroll={false}
                 className="text-center items-center"
+                replace
               >
                 <Image
                   src={sport.image.url}
@@ -87,7 +88,7 @@ const FilterBar = ({ sports, query }: Props) => {
         className="absolute bottom-0 left-0 right-0 w-full padding-x
       translate-y-1/2"
       >
-        <SearchBar />
+        <SearchBar searchTerm={query.searchTerm} />
       </div>
     </div>
   );

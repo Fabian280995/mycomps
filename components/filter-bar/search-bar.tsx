@@ -1,11 +1,6 @@
 "use client";
 import React, { useEffect } from "react";
-import {
-  Grip,
-  LucideRefreshCcw,
-  Search,
-  SlidersHorizontal,
-} from "lucide-react";
+import { LucideRefreshCcw, Search, SlidersHorizontal } from "lucide-react";
 import Link from "next/link";
 import useDebounce from "@/hooks/use-debounce";
 import { useRouter } from "next/navigation";
@@ -24,14 +19,18 @@ const SearchBar = ({ searchTerm }: Props) => {
 
   const onSubmit = (e: any) => {
     e.preventDefault();
-    router.push(`?$search=${searchValue}`, { scroll: false });
+    router.push(`?search=${searchValue}`, { scroll: false });
   };
 
   useEffect(() => {
     if (debouncedSearchTerm) {
-      router.push(`?$search=${debouncedSearchTerm}`, { scroll: false });
+      router.push(`?search=${debouncedSearchTerm}`, { scroll: false });
     }
   }, [debouncedSearchTerm]);
+
+  useEffect(() => {
+    setSearchValue(searchTerm ?? "");
+  }, [searchTerm]);
 
   return (
     <div className="w-full h-[3rem] flex items-center gap-2">

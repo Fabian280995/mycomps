@@ -7,8 +7,7 @@ import { useIntersection } from "@mantine/hooks";
 import queryString from "query-string";
 import MonthIndicator from "@/components/comps/month-indicator";
 import { compQueryParams } from "@/components/comps-overview";
-import Link from "next/link";
-import { Loader, Loader2 } from "lucide-react";
+import { Loader } from "lucide-react";
 import { sortCompsByMonth } from "@/lib/functions/sortComps";
 import { motion } from "framer-motion";
 
@@ -22,10 +21,11 @@ const getCompetitions = async ({
   query: compQueryParams;
 }) => {
   const url = queryString.stringifyUrl({
-    url: "https://mycomps-cms.vercel.app/api/competitions",
+    url: "http://localhost:3001/api/competitions" /* "https://mycomps-cms.vercel.app/api/competitions" */,
     query: {
       page,
       sportId: query.sportId,
+      searchTerm: query.searchTerm,
       startDate: query.startDate?.toString(),
       limit: PAGE_LIMIT,
     },
@@ -42,7 +42,9 @@ interface Props {
   query: compQueryParams;
 }
 
-const CompetitionsList = ({ query: { sportId, startDate } }: Props) => {
+const CompetitionsList = ({
+  query: { sportId, startDate, searchTerm },
+}: Props) => {
   const [compsByMonth, setCompsByMonth] = React.useState<
     { [key: string]: Competition[] } | undefined
   >(undefined);
@@ -51,15 +53,17 @@ const CompetitionsList = ({ query: { sportId, startDate } }: Props) => {
 
   const {
     data,
+    refetch,
     fetchNextPage,
     isFetching: loading,
   } = useInfiniteQuery(
-    ["query", { sportId, startDate }],
+    ["query", { sportId, startDate, searchTerm }],
     async ({ pageParam = 1 }) => {
       const response = await getCompetitions({
         page: pageParam,
-        query: { sportId, startDate },
+        query: { sportId, startDate, searchTerm },
       });
+      console.log("RESPONSE", response);
       return response;
     },
     {
@@ -93,6 +97,10 @@ const CompetitionsList = ({ query: { sportId, startDate } }: Props) => {
     setLastCompId(_comps[_comps.length - 1].id);
     setCompsByMonth(sortCompsByMonth(_comps));
   }, [data]);
+
+  useEffect(() => {
+    refetch();
+  }, [sportId, startDate, searchTerm]);
 
   return (
     <div className="my-12 space-y-24">

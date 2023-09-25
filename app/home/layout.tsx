@@ -8,11 +8,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div>
+    <main>
       <StaticHeader />
       {children}
       <BottomScrollIndicator />
       <Footer />
-    </div>
+    </main>
   );
 }

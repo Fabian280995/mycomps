@@ -7,6 +7,7 @@ import CompetitionsList from "@/components/comps/comps-list";
 export interface compQueryParams {
   startDate?: Date;
   sportId?: string;
+  searchTerm?: string;
 }
 
 const CompetitionsOverview = async ({
@@ -22,6 +23,9 @@ const CompetitionsOverview = async ({
     ? new Date(searchParams.startDate as string)
     : new Date();
   startDate.setHours(0, 0, 0, 0);
+  const searchTerm = searchParams.search
+    ? (searchParams.search as string)
+    : undefined;
 
   return (
     <div className="min-h-screen">
@@ -30,12 +34,14 @@ const CompetitionsOverview = async ({
         query={{
           startDate,
           sportId,
+          searchTerm,
         }}
       />
       <CompetitionsList
         query={{
           startDate,
           sportId,
+          searchTerm,
         }}
       />
     </div>
