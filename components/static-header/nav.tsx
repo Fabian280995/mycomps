@@ -14,9 +14,9 @@ const StaticHeaderNav = () => {
             <li key={route.href}>
               <Link
                 href={route.href}
-                className="relative transition-all duration-500 ease-in-out
+                className="relative transition-all duration-500 ease-in-out  text-gray-700
                 before:absolute before:bottom-0 before:left-0 before:w-0 before:h-0.5 before:bg-teal-400
-                before:transition-all before:duration-200 before:ease-in-out hover:before:w-full text-2xl"
+                before:transition-all before:duration-200 before:ease-in-out hover:before:w-full text-lg font-semibold"
               >
                 {route.label}
               </Link>

@@ -4,11 +4,11 @@ export const routes = [
     href: "/home",
   },
   {
-    label: "About",
-    href: "/about",
+    label: "Kontakt",
+    href: "/contact",
   },
   {
-    label: "Contact",
-    href: "/contact",
+    label: "Über uns",
+    href: "/about",
   },
 ];

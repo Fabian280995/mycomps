@@ -45,6 +45,7 @@ interface Props {
 const CompetitionsList = ({
   query: { sportId, startDate, searchTerm },
 }: Props) => {
+  const [nothingFound, setNothingFound] = React.useState(false);
   const [compsByMonth, setCompsByMonth] = React.useState<
     { [key: string]: Competition[] } | undefined
   >(undefined);
@@ -63,6 +64,8 @@ const CompetitionsList = ({
         page: pageParam,
         query: { sportId, startDate, searchTerm },
       });
+      if (response.data.length === 0) setNothingFound(true);
+      else setNothingFound(false);
       return response;
     },
     {
@@ -97,22 +100,22 @@ const CompetitionsList = ({
     setCompsByMonth(sortCompsByMonth(_comps));
   }, [data]);
 
-  useEffect(() => {
-    refetch();
-  }, [sportId, startDate, searchTerm]);
-
   return (
     <div className="my-12 space-y-24">
       <div>
         {loading && (
-          <motion.div
-            layout
-            className="w-full flex flex-col items-center justify-center mt-12 mb-6"
-          >
+          <div className="w-full flex flex-col items-center justify-center mt-12 mb-6">
             <Loader size={24} className="animate-spin text-gray-300" />
             <p className="text-sm text-gray-300">suche nach Änderungen...</p>
-          </motion.div>
+          </div>
         )}
+        {!loading && nothingFound ? (
+          <div className="w-full flex flex-col items-center justify-center mt-12 mb-6">
+            <p className="text-sm text-gray-500">
+              Tut uns leid, diese Suche hat keine Ergebnisse geliefert...
+            </p>
+          </div>
+        ) : null}
         {compsByMonth &&
           Object.keys(compsByMonth).map((month) => {
             if (!compsByMonth[month].length) {

@@ -24,7 +24,7 @@ const CompCard = ({ comp }: Props) => {
         className="relative w-full h-full flex flex-col bg-white shadow-md rounded-3xl overflow-hidden
         cursor-pointer hover:scale-[1.02] hover:-translate-y-2 hover:shadow-lg transition-all duration-150"
       >
-        <div className="relative w-full aspect-[3/2] overflow-hidden bg-gray-200">
+        <div className="relative group w-full aspect-[3/2] overflow-hidden bg-gray-200">
           <Image
             src={comp.logo.url}
             alt={comp.name}
@@ -36,6 +36,15 @@ const CompCard = ({ comp }: Props) => {
             )}
             onLoadingComplete={() => setLoading(false)}
           />
+          {comp.logo.creatorLink ? (
+            <a
+              href={comp.logo.creatorLink}
+              className="absolute bottom-2 right-2 w-full p-2 
+               truncate text-white"
+            >
+              Creator: {comp.logo.creatorLink}
+            </a>
+          ) : null}
         </div>
         <div className="px-4 py-2 flex flex-col space-y-2">
           <div className="flex">

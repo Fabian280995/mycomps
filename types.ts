@@ -58,5 +58,6 @@ export interface Address {
 
 export interface Image {
   id: string;
+  creatorLink: string;
   url: string;
 }

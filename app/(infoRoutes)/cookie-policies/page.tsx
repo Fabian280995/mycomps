@@ -2,8 +2,8 @@ import React from "react";
 
 const CookiePoliciesPage = () => {
   return (
-    <main className="max-w-5xl p-12 mx-auto">
-      <div className="bg-teal-400 rounded-md text-white p-4">
+    <div>
+      <div className="bg-teal-400 rounded-md text-white p-4 shadow-md">
         <h1 className="text-4xl text-center">
           Willkommen zu unseren Cookie-Richtlinien
         </h1>
@@ -124,7 +124,7 @@ const CookiePoliciesPage = () => {
           </p>
         </section>
       </div>
-    </main>
+    </div>
   );
 };
 
