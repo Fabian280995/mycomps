@@ -3,7 +3,9 @@ import { cn } from "@/lib/utils";
 import { Competition } from "@/types";
 import { Calendar, Flame, MapPin, User2 } from "lucide-react";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import React from "react";
+import EnrollmentLink from "./enrollment-link";
 
 interface Props {
   comp: Competition;
@@ -11,6 +13,9 @@ interface Props {
 
 const CompCard = ({ comp }: Props) => {
   const [loading, setLoading] = React.useState(true);
+
+  const router = useRouter();
+
   const start = new Date(comp.startDate).toLocaleDateString("de-DE");
   const end = new Date(comp.endDate).toLocaleDateString("de-DE");
   const date = `${start} ${comp.startDate === comp.endDate ? "" : `- ${end}`}`;
@@ -19,7 +24,11 @@ const CompCard = ({ comp }: Props) => {
   const organizerLink = comp.organizer.url;
 
   return (
-    <div className="w-full h-full max-w-xs">
+    <button
+      type="button"
+      className="w-full h-full max-w-xs"
+      onClick={() => router.push(`/home?competition_id=${comp.id}`)}
+    >
       <div
         className="relative w-full h-full flex flex-col bg-white shadow-md rounded-3xl overflow-hidden
         cursor-pointer hover:scale-[1.02] hover:-translate-y-2 hover:shadow-lg transition-all duration-150"
@@ -78,22 +87,7 @@ const CompCard = ({ comp }: Props) => {
               <p className="text-md truncate">{date}</p>
             </div>
           </div>
-          {comp.enrollmentLink ? (
-            <a
-              href={comp.enrollmentLink}
-              className="bg-teal-400 rounded-md hover:bg-teal-500 transition-all duration-150 px-4 py-2 text-center"
-            >
-              <p className="text-white font-semibold text-xs">
-                direkt einschreiben!
-              </p>
-            </a>
-          ) : (
-            <div className="bg-gray-50 rounded-md px-4 py-2 text-center">
-              <p className="text-gray-400 font-semibold text-xs">
-                kein Link zur Einschreibung verfügbar
-              </p>
-            </div>
-          )}
+          <EnrollmentLink enrollmentLink={comp.enrollmentLink} />
         </div>
         {false ? (
           <div className="absolute top-2 left-2 rounded-full p-2">
@@ -112,7 +106,7 @@ const CompCard = ({ comp }: Props) => {
           </div>
         ) : null}
       </div>
-    </div>
+    </button>
   );
 };
 

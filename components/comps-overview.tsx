@@ -3,6 +3,8 @@ import getSports from "@/lib/actions/getSports";
 
 import FilterBar from "@/components/filter-bar/filter-bar";
 import CompetitionsList from "@/components/comps/comps-list";
+import CompetitionModal from "./comps/comp-modal";
+import { AnimatePresence } from "framer-motion";
 
 export interface compQueryParams {
   startDate?: Date;
@@ -26,25 +28,31 @@ const CompetitionsOverview = async ({
   const searchTerm = searchParams.search
     ? (searchParams.search as string)
     : undefined;
+  const competition_id = searchParams.competition_id
+    ? (searchParams.competition_id as string)
+    : undefined;
 
   return (
-    <div className="min-h-screen">
-      <FilterBar
-        sports={sports}
-        query={{
-          startDate,
-          sportId,
-          searchTerm,
-        }}
-      />
-      <CompetitionsList
-        query={{
-          startDate,
-          sportId,
-          searchTerm,
-        }}
-      />
-    </div>
+    <>
+      {competition_id ? <CompetitionModal compId={competition_id} /> : null}
+      <div className="min-h-screen">
+        <FilterBar
+          sports={sports}
+          query={{
+            startDate,
+            sportId,
+            searchTerm,
+          }}
+        />
+        <CompetitionsList
+          query={{
+            startDate,
+            sportId,
+            searchTerm,
+          }}
+        />
+      </div>
+    </>
   );
 };
 
