@@ -1,6 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import StaticHeaderNav from "./nav";
+import { SignOutButton, SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
 
 const StaticHeader = () => {
   return (
@@ -25,22 +26,28 @@ const StaticHeader = () => {
       </div>
       <StaticHeaderNav />
       <div className="flex items-center gap-4">
-        <Link href="/login">
-          <button
-            className="hover:underline transition-all duration-150
+        <SignedIn>
+          <SignOutButton />
+          <UserButton afterSignOutUrl="/" />
+        </SignedIn>
+        <SignedOut>
+          <Link href="/sign-in">
+            <button
+              className="hover:underline transition-all duration-150
           text-gray-400 font-semibold text-lg "
-          >
-            Anmelden
-          </button>
-        </Link>
-        <Link href="/register">
-          <button
-            className="bg-teal-400 hover:bg-teal-500 transition-all duration-150
+            >
+              Anmelden
+            </button>
+          </Link>
+          <Link href="/sign-up">
+            <button
+              className="bg-teal-400 hover:bg-teal-500 transition-all duration-150
           text-white font-semibold text-lg px-4 py-2 rounded-md"
-          >
-            Registrieren
-          </button>
-        </Link>
+            >
+              Registrieren
+            </button>
+          </Link>
+        </SignedOut>
       </div>
     </header>
   );

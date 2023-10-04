@@ -4,7 +4,6 @@ import getSports from "@/lib/actions/getSports";
 import FilterBar from "@/components/filter-bar/filter-bar";
 import CompetitionsList from "@/components/comps/comps-list";
 import CompetitionModal from "./comps/comp-modal";
-import { AnimatePresence } from "framer-motion";
 
 export interface compQueryParams {
   startDate?: Date;
