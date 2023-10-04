@@ -1,19 +1,21 @@
-import MainHeader from "@/components/main-header";
 import BottomScrollIndicator from "@/components/bottom-scroll-indicator";
-import Footer from "@/components/footer";
-import StaticHeader from "@/components/main-header";
+import { auth } from "@clerk/nextjs";
+import { redirect } from "next/navigation";
 
 export default function RoutesLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const { userId } = auth();
+  if (!userId) {
+    redirect("/home");
+  }
+
   return (
     <main className="w-full">
-      <StaticHeader />
-      <div className="max-w-5xl mx-auto my-12">{children}</div>
+      {children}
       <BottomScrollIndicator />
-      <Footer />
     </main>
   );
 }

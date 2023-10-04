@@ -7,7 +7,7 @@ const getCompetition = async (id: string): Promise<Competition> => {
   4;
 
   const res = await fetch(
-    `http://localhost:3001/api/competitions/${id}`,
+    `https://mycomps-cms.vercel.app/api/competitions/${id}`,
     options
   );
   return res.json();

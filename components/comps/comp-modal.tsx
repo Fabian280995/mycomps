@@ -3,8 +3,8 @@ import React, { useEffect } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useQuery } from "@tanstack/react-query";
-import { Calendar, Loader2, MapPin, User2, X } from "lucide-react";
-import { AnimatePresence, motion } from "framer-motion";
+import { Loader2, MapPin, User2, X } from "lucide-react";
+import { motion } from "framer-motion";
 
 import { Competition } from "@/types";
 import getCompetition from "@/lib/actions/getCompetition";
@@ -36,7 +36,6 @@ const CompetitionModal = ({ compId }: CompetitionModalProps) => {
   );
 
   useEffect(() => {
-    console.log("competition", competition);
     if (competition) {
       const start = new Date(competition.startDate).toLocaleDateString("de-DE");
       const end = new Date(competition.endDate).toLocaleDateString("de-DE");

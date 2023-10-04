@@ -13,7 +13,7 @@ const LINK_PATHNAME = "/home";
 
 const SearchBar = ({ searchTerm }: Props) => {
   const [searchValue, setSearchValue] = React.useState(searchTerm ?? "");
-  const debouncedSearchTerm = useDebounce(searchValue, 1000);
+  const debouncedSearchTerm = useDebounce(searchValue, 500);
 
   const router = useRouter();
 

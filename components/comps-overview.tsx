@@ -4,6 +4,8 @@ import getSports from "@/lib/actions/getSports";
 import FilterBar from "@/components/filter-bar/filter-bar";
 import CompetitionsList from "@/components/comps/comps-list";
 import CompetitionModal from "./comps/comp-modal";
+import { AnimatePresence } from "framer-motion";
+import CompetitionModalProvider from "@/providers/competition-modal.provider";
 
 export interface compQueryParams {
   startDate?: Date;
@@ -33,7 +35,7 @@ const CompetitionsOverview = async ({
 
   return (
     <>
-      {competition_id ? <CompetitionModal compId={competition_id} /> : null}
+      <CompetitionModalProvider competition_id={competition_id} />
       <div className="min-h-screen">
         <FilterBar
           sports={sports}

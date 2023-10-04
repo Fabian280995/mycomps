@@ -1,15 +1,11 @@
 import { TanstackProvider } from "@/providers/query-client.provider";
 import "./globals.css";
 import type { Metadata } from "next";
-import { Lato } from "next/font/google";
+import { Inter, Lato } from "next/font/google";
 import { Analytics } from "@vercel/analytics/react";
 import { ClerkProvider } from "@clerk/nextjs";
 
-const lato = Lato({
-  subsets: ["latin"],
-  display: "swap",
-  weight: "400",
-});
+const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "mycomps",
@@ -22,9 +18,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <ClerkProvider>
+    <ClerkProvider
+      appearance={{
+        variables: {
+          colorPrimary: "#2dd4bf",
+        },
+      }}
+    >
       <html lang="en">
-        <body className={`${lato.className} no-scrollbar`}>
+        <body className={`${inter.className} no-scrollbar`}>
           <TanstackProvider>{children}</TanstackProvider>
           <Analytics />
         </body>
