@@ -65,7 +65,7 @@ const FilterBar = ({ sports, query }: Props) => {
                   height={28}
                   className="mx-auto"
                 />
-                <p className="text-gray-700 font-bold text-sm truncate">
+                <p className="text-gray-700 font-semibold text-sm truncate">
                   {sport.name}
                 </p>
               </Link>

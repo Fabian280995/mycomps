@@ -175,7 +175,7 @@ const CompetitionModal = ({ compId }: CompetitionModalProps) => {
           </div>
         </motion.div>
       ) : (
-        <Loader2 className="w-12 h-12 text-teal-400 animate-spin" />
+        <Loader2 className="w-12 h-12 text-gray-400/30 animate-spin" />
       )}
     </div>
   );

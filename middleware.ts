@@ -13,6 +13,7 @@ export default authMiddleware({
     "/contact",
     "/cookie-policies",
     "/impressum",
+    "/for-organizers",
   ],
   /* beforeAuth: async (req: NextRequest) => {
     const regex = new RegExp("^/$");

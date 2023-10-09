@@ -23,6 +23,9 @@ interface Props {
 
 const CompCard = ({ comp }: Props) => {
   const [loading, setLoading] = React.useState(true);
+  const { userId: clerkUserId } = useAuth();
+
+  /* 
   const { getToken } = useAuth();
   const mutation = useMutation({
     mutationKey: ["newFavorite"],
@@ -41,7 +44,7 @@ const CompCard = ({ comp }: Props) => {
 
       return res.json();
     },
-  });
+  }); */
 
   const router = useRouter();
 
@@ -52,10 +55,10 @@ const CompCard = ({ comp }: Props) => {
   const googleMapsLink = `https://www.google.com/maps/search/?api=1&query=${comp.location.address.street}+${comp.location.address.number}+${comp.location.address.zip}+${comp.location.address.city}`;
   const organizerLink = comp.organizer.url;
 
-  const handleFavoriteButtonClicked = async () => {
+  /* const handleFavoriteButtonClicked = async () => {
     const res = await mutation.mutateAsync();
     console.log("Query_Response", res);
-  };
+  }; */
 
   return (
     <div
@@ -142,17 +145,15 @@ const CompCard = ({ comp }: Props) => {
             />
           </div>
         ) : null}
-        <button
-          className="absolute top-2 right-2 rounded-full p-2"
-          type="button"
-          onClick={handleFavoriteButtonClicked}
-        >
-          {true ? (
-            <Sparkles className="w-6h-6 text-amber-200 drop-shadow-dark-sm" />
-          ) : (
-            <Sparkle className="w-6 h-6 text-gray-200" />
-          )}
-        </button>
+        {clerkUserId ? (
+          <div className="absolute top-2 right-2 rounded-full p-2">
+            {true ? (
+              <Sparkles className="w-6h-6 text-amber-200 drop-shadow-dark-sm" />
+            ) : (
+              <Sparkle className="w-6 h-6 text-gray-200" />
+            )}
+          </div>
+        ) : null}
       </div>
     </div>
   );

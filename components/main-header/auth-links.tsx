@@ -1,6 +1,13 @@
 "use client";
 
-import { SignInButton, SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
+import {
+  ClerkLoading,
+  SignInButton,
+  SignedIn,
+  SignedOut,
+  UserButton,
+} from "@clerk/nextjs";
+import { User2 } from "lucide-react";
 import Link from "next/link";
 
 const AuthLinks = () => {
@@ -9,26 +16,29 @@ const AuthLinks = () => {
       <SignedIn>
         <Link
           href="/dashboard"
-          className="hover:underline transition-all duration-150
-      text-gray-700 text-base "
-          legacyBehavior
+          className="hover:underline transition-all duration-150 text-gray-400 font-semibold text-base"
         >
           Zum Dashboard
         </Link>
-        <UserButton afterSignOutUrl="/" />
+        <div className="ring-2 ring-teal-400 rounded-full ring-offset-2 w-8 h-8 flex justify-center items-center">
+          <ClerkLoading>
+            <User2 size={24} className="text-gray-400/20" />
+          </ClerkLoading>
+          <UserButton afterSignOutUrl="/" />
+        </div>
       </SignedIn>
       <SignedOut>
         <Link
           href="/for-organizers"
           className="hover:underline transition-all duration-150
-    text-gray-400 font-semibold text-lg "
+        text-gray-400 font-semibold text-base"
         >
-          Ich bin Veranstalter
+          Ich veranstalte Wettkämpfe
         </Link>
         <SignInButton>
           <button
             className="bg-teal-400 hover:bg-teal-500 transition-all duration-150
-    text-white font-semibold text-lg px-4 py-2 rounded-md"
+          text-white font-semibold text-lg uppercase px-4 py-2 rounded-md"
           >
             Anmelden
           </button>

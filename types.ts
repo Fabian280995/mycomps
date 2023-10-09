@@ -61,3 +61,11 @@ export interface Image {
   creatorLink: string;
   url: string;
 }
+
+export interface User {
+  id: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+  competitions: Competition[];
+}
