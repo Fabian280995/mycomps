@@ -1,7 +1,7 @@
 import { TanstackProvider } from "@/providers/query-client.provider";
 import "./globals.css";
 import type { Metadata } from "next";
-import { Inter, Lato } from "next/font/google";
+import { Inter } from "next/font/google";
 import { Analytics } from "@vercel/analytics/react";
 import { ClerkProvider } from "@clerk/nextjs";
 
@@ -18,19 +18,19 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <ClerkProvider
-      appearance={{
-        variables: {
-          colorPrimary: "#2dd4bf",
-        },
-      }}
-    >
-      <html lang="en">
+    <html lang="en">
+      <ClerkProvider
+        appearance={{
+          variables: {
+            colorPrimary: "#2dd4bf",
+          },
+        }}
+      >
         <body className={`${inter.className} no-scrollbar`}>
           <TanstackProvider>{children}</TanstackProvider>
           <Analytics />
         </body>
-      </html>
-    </ClerkProvider>
+      </ClerkProvider>
+    </html>
   );
 }

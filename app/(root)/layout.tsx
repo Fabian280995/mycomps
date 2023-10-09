@@ -1,14 +1,18 @@
 import BottomScrollIndicator from "@/components/bottom-scroll-indicator";
+import Footer from "@/components/footer";
+import MainHeader from "@/components/main-header";
 
-export default function UserAreaLayout({
+export default function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
   return (
-    <main className="w-full">
+    <main>
+      <MainHeader />
       {children}
       <BottomScrollIndicator />
+      <Footer />
     </main>
   );
 }

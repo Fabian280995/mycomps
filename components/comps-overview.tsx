@@ -1,10 +1,7 @@
-import React from "react";
 import getSports from "@/lib/actions/getSports";
 
-import FilterBar from "@/components/filter-bar/filter-bar";
 import CompetitionsList from "@/components/comps/comps-list";
-import CompetitionModal from "./comps/comp-modal";
-import { AnimatePresence } from "framer-motion";
+import FilterBar from "@/components/filter-bar/filter-bar";
 import CompetitionModalProvider from "@/providers/competition-modal.provider";
 
 export interface compQueryParams {
@@ -45,13 +42,14 @@ const CompetitionsOverview = async ({
             searchTerm,
           }}
         />
-        <CompetitionsList
+        {/*  <CompetitionsList
           query={{
             startDate,
             sportId,
+
             searchTerm,
           }}
-        />
+        /> */}
       </div>
     </>
   );

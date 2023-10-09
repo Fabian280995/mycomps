@@ -1,6 +1,6 @@
 import BottomScrollIndicator from "@/components/bottom-scroll-indicator";
 import Footer from "@/components/footer";
-import StaticHeader from "@/components/main-header";
+import MainHeader from "@/components/main-header";
 
 export default function RootLayout({
   children,
@@ -9,7 +9,7 @@ export default function RootLayout({
 }) {
   return (
     <main>
-      <StaticHeader />
+      <MainHeader />
       {children}
       <BottomScrollIndicator />
       <Footer />

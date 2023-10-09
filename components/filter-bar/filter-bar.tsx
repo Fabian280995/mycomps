@@ -11,7 +11,7 @@ interface Props {
   query: compQueryParams;
 }
 
-const LINK_PATHNAME = "/home";
+const LINK_PATHNAME = "/";
 const LINK_WIDTH = 6;
 
 const FilterBar = ({ sports, query }: Props) => {

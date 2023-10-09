@@ -7,22 +7,22 @@ import { authMiddleware } from "@clerk/nextjs";
 // See https://clerk.com/docs/references/nextjs/auth-middleware for more information about configuring your middleware
 export default authMiddleware({
   publicRoutes: [
+    "/",
     "/in-development",
-    "/home",
     "/about",
     "/contact",
     "/cookie-policies",
     "/impressum",
   ],
-  beforeAuth: async (req: NextRequest) => {
+  /* beforeAuth: async (req: NextRequest) => {
     const regex = new RegExp("^/$");
     if (regex.test(req.nextUrl.pathname)) {
       return NextResponse.redirect(new URL("/in-development", req.nextUrl), {
         status: 302,
       });
     }
-    return NextResponse.next();
-  },
+  }, */
+  debug: true,
 });
 
 export const config = {
