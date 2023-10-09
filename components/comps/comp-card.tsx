@@ -28,7 +28,7 @@ const CompCard = ({ comp }: Props) => {
     mutationKey: ["newFavorite"],
     mutationFn: async () => {
       console.log("mutationFn");
-      const res = await fetch("http://localhost:3001/api/favorites", {
+      const res = await fetch("http://localhost:3000/api/favorites", {
         method: "GET",
         headers: {
           Authorization: `Bearer ${await getToken()}`,
@@ -60,11 +60,11 @@ const CompCard = ({ comp }: Props) => {
   return (
     <div
       className="w-full h-full max-w-xs"
-      onClick={() => router.push(`/home?competition_id=${comp.id}`)}
+      onClick={() => router.push(`/?competition_id=${comp.id}`)}
     >
       <div
-        className="relative w-full h-full flex flex-col bg-white shadow-lg rounded-3xl overflow-hidden
-        cursor-pointer hover:scale-[1.02] hover:-translate-y-2 hover:shadow-xl transition-all duration-150"
+        className="relative w-full h-full flex flex-col bg-white border rounded-3xl overflow-hidden
+        cursor-pointer hover:scale-[1.02] hover:-translate-y-2 hover:shadow-lg  transition-all duration-150"
       >
         <div className="relative group w-full aspect-[3/2] overflow-hidden bg-gray-200">
           <Image

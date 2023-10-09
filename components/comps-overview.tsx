@@ -42,14 +42,14 @@ const CompetitionsOverview = async ({
             searchTerm,
           }}
         />
-        {/*  <CompetitionsList
+        <CompetitionsList
           query={{
             startDate,
             sportId,
 
             searchTerm,
           }}
-        /> */}
+        />
       </div>
     </>
   );

@@ -22,6 +22,8 @@ interface formattedCompetitionProps extends Competition {
   organizerLink: string;
 }
 
+const BACK_LINK = "/";
+
 const CompetitionModal = ({ compId }: CompetitionModalProps) => {
   const [formattedCompetition, setFormattedCompetition] = React.useState<
     formattedCompetitionProps | undefined
@@ -90,7 +92,7 @@ const CompetitionModal = ({ compId }: CompetitionModalProps) => {
         variants={backdropVariants}
         exit="hidden"
         className="bg-white/80 backdrop-filter backdrop-blur-sm absolute w-full h-full"
-        onClick={() => router.push("/home")}
+        onClick={() => router.push(BACK_LINK)}
       />
       {formattedCompetition ? (
         <motion.div
@@ -123,7 +125,7 @@ const CompetitionModal = ({ compId }: CompetitionModalProps) => {
               <button
                 type="button"
                 onClick={() =>
-                  router.replace("/home", {
+                  router.replace(BACK_LINK, {
                     scroll: false,
                   })
                 }

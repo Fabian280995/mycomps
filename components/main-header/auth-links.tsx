@@ -15,7 +15,7 @@ const AuthLinks = () => {
         >
           Zum Dashboard
         </Link>
-        <UserButton afterSignOutUrl="/home" />
+        <UserButton afterSignOutUrl="/" />
       </SignedIn>
       <SignedOut>
         <Link

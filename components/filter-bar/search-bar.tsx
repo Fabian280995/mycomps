@@ -9,7 +9,7 @@ import { cn } from "@/lib/utils";
 interface Props {
   searchTerm?: string;
 }
-const LINK_PATHNAME = "/home";
+const LINK_PATHNAME = "/";
 
 const SearchBar = ({ searchTerm }: Props) => {
   const [searchValue, setSearchValue] = React.useState(searchTerm ?? "");
