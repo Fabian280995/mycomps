@@ -1,14 +1,27 @@
 "use client";
-import React, { useEffect } from "react";
-import Image from "next/image";
-import { useRouter } from "next/navigation";
 import { useQuery } from "@tanstack/react-query";
-import { Loader2, MapPin, User2, X } from "lucide-react";
 import { motion } from "framer-motion";
+import {
+  Loader2,
+  MapPin,
+  Sparkle,
+  Sparkles,
+  Star,
+  User2,
+  X,
+} from "lucide-react";
+import Image from "next/image";
+import { usePathname, useRouter } from "next/navigation";
+import React, { useEffect } from "react";
 
-import { Competition } from "@/types";
 import getCompetition from "@/lib/actions/getCompetition";
+import { Competition } from "@/types";
 import EnrollmentLink from "./enrollment-link";
+import { useUserInfo } from "@/providers/user-info.provider";
+import { cn } from "@/lib/utils";
+import { useAuth } from "@clerk/nextjs";
+import { get } from "http";
+import { updateUserCompIds } from "@/lib/actions/user.actions";
 
 interface CompetitionModalProps {
   compId: string;
@@ -22,13 +35,24 @@ interface formattedCompetitionProps extends Competition {
   organizerLink: string;
 }
 
-const BACK_LINK = "/";
-
 const CompetitionModal = ({ compId }: CompetitionModalProps) => {
+  const {
+    userInfo,
+    isLoading: loadingUserInfo,
+    refetchUserInfo,
+  } = useUserInfo();
+  const [loading, setLoading] = React.useState(true);
   const [formattedCompetition, setFormattedCompetition] = React.useState<
     formattedCompetitionProps | undefined
   >(undefined);
+
   const router = useRouter();
+  const pathname = usePathname();
+  const { getToken } = useAuth();
+
+  const backLink = pathname.split("?")[0];
+  const isFavorite = userInfo && userInfo.compIds.includes(compId);
+
   const { data: competition, failureCount } = useQuery(
     ["competition", compId],
     () => getCompetition(compId),
@@ -55,9 +79,34 @@ const CompetitionModal = ({ compId }: CompetitionModalProps) => {
 
   useEffect(() => {
     if (failureCount >= 2) {
-      router.push("/home");
+      router.push(backLink);
     }
   }, [failureCount]);
+
+  const handleFavorite = async () => {
+    setLoading(true);
+    try {
+      if (!userInfo) return;
+      const token = await getToken();
+      if (!token) return;
+
+      const updatetCompIds = userInfo.compIds.includes(compId)
+        ? userInfo.compIds.filter((id) => id !== compId)
+        : [...userInfo.compIds, compId];
+      const updatedUser = await updateUserCompIds(token, updatetCompIds);
+
+      if (updatedUser) {
+        refetchUserInfo();
+      }
+    } catch (err: any) {
+      console.log(
+        "COMPETITION_MODAL: Error updating user compIds: ",
+        err.message
+      );
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const backdropVariants = {
     visible: {
@@ -92,7 +141,7 @@ const CompetitionModal = ({ compId }: CompetitionModalProps) => {
         variants={backdropVariants}
         exit="hidden"
         className="bg-white/80 backdrop-filter backdrop-blur-sm absolute w-full h-full"
-        onClick={() => router.push(BACK_LINK)}
+        onClick={() => router.push(backLink)}
       />
       {formattedCompetition ? (
         <motion.div
@@ -115,23 +164,45 @@ const CompetitionModal = ({ compId }: CompetitionModalProps) => {
             />
           </div>
           <div className="flex flex-col gap-4 px-8 py-8 max-h-full w-full overflow-auto no-scrollbar">
-            <div className="flex gap-4 items-center justify-end text-gray-500">
-              <a href={formattedCompetition.organizerLink}>
-                <User2 className="w-6 h-6 active:scale-90 transition-all hover:text-gray-700" />
-              </a>
-              <a href={formattedCompetition.googleMapsLink}>
-                <MapPin className="w-6 h-6 active:scale-90 transition-all hover:text-gray-700" />
-              </a>
+            <div className="flex items-center justify-between gap-8">
               <button
                 type="button"
-                onClick={() =>
-                  router.replace(BACK_LINK, {
-                    scroll: false,
-                  })
-                }
+                className={cn(
+                  "rounded-md px-3 py-1 flex items-center gap-1 transition-all duration-150 border-2",
+                  "active:scale-90",
+                  isFavorite
+                    ? "bg-teal-400 text-white hover:bg-teal-500 hover:border-teal-500 border-teal-400"
+                    : "bg-white text-gray-500 hover:bg-teal-200 hover:text-white border-teal-200",
+                  "disabled:opacity-50 disabled:cursor-not-allowed disabled:pointer-events-none"
+                )}
+                disabled={loadingUserInfo || !userInfo}
+                onClick={handleFavorite}
               >
-                <X className="w-6 h-6 active:scale-90 transition-all hover:text-gray-700" />
+                {!isFavorite ? (
+                  <Sparkle className="w-4 h-4" />
+                ) : (
+                  <Sparkles className="w-4 h-4 text-amber-200" />
+                )}
+                merken
               </button>
+              <div className="flex gap-4 items-center justify-end text-gray-500">
+                <a href={formattedCompetition.organizerLink}>
+                  <User2 className="w-6 h-6 active:scale-90 transition-all hover:text-gray-700" />
+                </a>
+                <a href={formattedCompetition.googleMapsLink}>
+                  <MapPin className="w-6 h-6 active:scale-90 transition-all hover:text-gray-700" />
+                </a>
+                <button
+                  type="button"
+                  onClick={() =>
+                    router.replace(backLink, {
+                      scroll: false,
+                    })
+                  }
+                >
+                  <X className="w-6 h-6 active:scale-90 transition-all hover:text-gray-700" />
+                </button>
+              </div>
             </div>
             <h1 className="text-2xl font-bold">{formattedCompetition.name}</h1>
             <p className="text-gray-700">

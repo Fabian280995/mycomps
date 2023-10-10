@@ -1,9 +1,6 @@
 import { User } from "@/types";
 
 const getUserInfo = async (jwtToken: string): Promise<User> => {
-  console.log("trying to get user info");
-  console.log("JWT TOKEN", jwtToken);
-
   const res = await fetch("http://localhost:3001/api/app-users/user", {
     method: "GET",
     headers: {
@@ -11,11 +8,11 @@ const getUserInfo = async (jwtToken: string): Promise<User> => {
     },
   });
 
-  const data = await res.json();
+  if (!res.ok) {
+    throw new Error("Failed to fetch user info");
+  }
 
-  console.log("data", data);
-
-  return data;
+  return res.json();
 };
 
 export default getUserInfo;

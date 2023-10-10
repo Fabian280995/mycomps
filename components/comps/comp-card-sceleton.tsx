@@ -1,18 +1,10 @@
-import {
-  Calendar,
-  Flame,
-  ImageIcon,
-  Loader2,
-  MapPin,
-  User2,
-} from "lucide-react";
-import React from "react";
+import { Calendar, ImageIcon, MapPin, User2 } from "lucide-react";
 
 const CompCardSceleton = () => {
   return (
-    <div className="w-full h-full max-w-xs animate-pulse">
+    <div className="w-[300px] h-[386px] max-w-xs animate-pulse">
       <div
-        className="relative w-full h-full flex flex-col bg-white shadow-md rounded-md overflow-hidden
+        className="relative w-full h-full flex flex-col bg-white border rounded-3xl overflow-hidden
         hover:scale-[1.02] hover:-translate-y-2 hover:shadow-lg transition-all duration-150"
       >
         <div className="w-full aspect-[3/2] overflow-hidden bg-gray-200 flex items-center justify-center">

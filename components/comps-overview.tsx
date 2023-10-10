@@ -46,7 +46,6 @@ const CompetitionsOverview = async ({
           query={{
             startDate,
             sportId,
-
             searchTerm,
           }}
         />

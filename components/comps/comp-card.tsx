@@ -10,44 +10,23 @@ import {
   User2,
 } from "lucide-react";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
-import React from "react";
-import EnrollmentLink from "./enrollment-link";
-import { useAuth } from "@clerk/nextjs";
-import { useMutation } from "@tanstack/react-query";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import React, { useEffect } from "react";
+import EnrollmentLink from "./enrollment-link";
+import { useUserInfo } from "@/providers/user-info.provider";
 
 interface Props {
   comp: Competition;
 }
 
 const CompCard = ({ comp }: Props) => {
-  const [loading, setLoading] = React.useState(true);
-  const { userId: clerkUserId } = useAuth();
-
-  /* 
-  const { getToken } = useAuth();
-  const mutation = useMutation({
-    mutationKey: ["newFavorite"],
-    mutationFn: async () => {
-      console.log("mutationFn");
-      const res = await fetch("http://localhost:3000/api/favorites", {
-        method: "GET",
-        headers: {
-          Authorization: `Bearer ${await getToken()}`,
-        },
-      });
-
-      if (!res.ok) {
-        throw new Error("Network response error");
-      }
-
-      return res.json();
-    },
-  }); */
-
   const router = useRouter();
 
+  const { userInfo, isLoading } = useUserInfo();
+
+  const [loading, setLoading] = React.useState(true);
+  const isFavorite = userInfo && userInfo.compIds.includes(comp.id);
   const start = new Date(comp.startDate).toLocaleDateString("de-DE");
   const end = new Date(comp.endDate).toLocaleDateString("de-DE");
   const date = `${start} ${comp.startDate === comp.endDate ? "" : `- ${end}`}`;
@@ -55,19 +34,14 @@ const CompCard = ({ comp }: Props) => {
   const googleMapsLink = `https://www.google.com/maps/search/?api=1&query=${comp.location.address.street}+${comp.location.address.number}+${comp.location.address.zip}+${comp.location.address.city}`;
   const organizerLink = comp.organizer.url;
 
-  /* const handleFavoriteButtonClicked = async () => {
-    const res = await mutation.mutateAsync();
-    console.log("Query_Response", res);
-  }; */
-
   return (
     <div
-      className="w-full h-full max-w-xs"
-      onClick={() => router.push(`/?competition_id=${comp.id}`)}
+      className="w-[300px] h-[386px] max-w-xs"
+      onClick={() => router.push(`?competition_id=${comp.id}`)}
     >
       <div
         className="relative w-full h-full flex flex-col bg-white border rounded-3xl overflow-hidden
-        cursor-pointer hover:scale-[1.02] hover:-translate-y-2 hover:shadow-lg  transition-all duration-150"
+        cursor-pointer hover:scale-[1.02] hover:-translate-y-2 hover:shadow-lg transition-all duration-150"
       >
         <div className="relative group w-full aspect-[3/2] overflow-hidden bg-gray-200">
           <Image
@@ -145,15 +119,13 @@ const CompCard = ({ comp }: Props) => {
             />
           </div>
         ) : null}
-        {clerkUserId ? (
-          <div className="absolute top-2 right-2 rounded-full p-2">
-            {true ? (
-              <Sparkles className="w-6h-6 text-amber-200 drop-shadow-dark-sm" />
-            ) : (
-              <Sparkle className="w-6 h-6 text-gray-200" />
-            )}
-          </div>
-        ) : null}
+        <div className="absolute top-2 right-2 rounded-full p-2">
+          {isFavorite ? (
+            <Sparkles className="w-6h-6 text-amber-200 drop-shadow-dark-sm" />
+          ) : (
+            <Sparkle className="w-6 h-6 text-gray-200/40" />
+          )}
+        </div>
       </div>
     </div>
   );

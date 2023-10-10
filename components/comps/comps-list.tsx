@@ -1,15 +1,15 @@
 "use client";
-import { Competition } from "@/types";
-import React, { useEffect, useRef } from "react";
-import { useInfiniteQuery } from "@tanstack/react-query";
-import CompCard from "@/components/comps/comp-card";
-import { useIntersection } from "@mantine/hooks";
-import queryString from "query-string";
-import MonthIndicator from "@/components/comps/month-indicator";
 import { compQueryParams } from "@/components/comps-overview";
-import { Loader } from "lucide-react";
+import CompCard from "@/components/comps/comp-card";
+import MonthIndicator from "@/components/comps/month-indicator";
 import { sortCompsByMonth } from "@/lib/functions/sortComps";
+import { Competition } from "@/types";
+import { useIntersection } from "@mantine/hooks";
+import { useInfiniteQuery } from "@tanstack/react-query";
 import { motion } from "framer-motion";
+import { Loader } from "lucide-react";
+import queryString from "query-string";
+import React, { useEffect, useRef } from "react";
 
 const PAGE_LIMIT = 12;
 
@@ -54,7 +54,6 @@ const CompetitionsList = ({
 
   const {
     data,
-    refetch,
     fetchNextPage,
     isFetching: loading,
   } = useInfiniteQuery(
@@ -101,7 +100,7 @@ const CompetitionsList = ({
   }, [data]);
 
   return (
-    <div className="my-12 space-y-24">
+    <div className="my-12 space-y-24 flex flex-col justify-center items-center">
       <div>
         {loading && (
           <div className="w-full flex flex-col items-center justify-center mt-12 mb-6">
@@ -124,7 +123,7 @@ const CompetitionsList = ({
             return (
               <motion.section layout key={month} className="padding-x">
                 <MonthIndicator month={month} />
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-6 py-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 py-6">
                   {compsByMonth[month].map((comp) => {
                     if (lastCompId === comp.id) {
                       return (
