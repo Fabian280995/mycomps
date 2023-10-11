@@ -1,8 +1,5 @@
 import Sidebar from "@/components/user-dashboard/sidebar";
-import getUserInfo from "@/lib/actions/getUserInfo";
 import UserInfoProvider from "@/providers/user-info.provider";
-import { auth } from "@clerk/nextjs";
-import { redirect } from "next/navigation";
 
 export default async function UserAreaLayout({
   children,
@@ -13,7 +10,9 @@ export default async function UserAreaLayout({
     <UserInfoProvider>
       <main className="w-full h-screen flex">
         <Sidebar />
-        <div className="flex-1 w-full h-full overflow-y-auto">{children}</div>
+        <div className="flex-1 w-full h-full overflow-y-auto bg-gray-50 padding-x py-6 sm:py-8 lg:py-10 xl:py-12">
+          {children}
+        </div>
       </main>
     </UserInfoProvider>
   );

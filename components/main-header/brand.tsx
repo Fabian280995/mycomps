@@ -1,21 +1,27 @@
+import { cn } from "@/lib/utils";
 import Link from "next/link";
 import React from "react";
 
-const Brand = () => {
+const Brand = ({ noHighlight }: { noHighlight?: boolean }) => {
   return (
     <div className="flex justify-between items-center sm:items-end transition-all duration-500 ease-in-out">
       <Link href="/">
         <h1
-          className="transition-all duration-500 ease-in-out font-semibold
-      select-none cursor-pointer text-4xl drop-shadow-md text-gray-900"
+          className={cn(
+            "transition-all duration-500 ease-in-out font-semibold",
+            "select-none cursor-pointer text-gray-900",
+            !noHighlight ? "drop-shadow-md text-4xl" : "text-3xl"
+          )}
         >
           my
           <span className="font-bold text-teal-400">comps</span>
           <span className="text-gray-400 text-sm ml-1">.de</span>
         </h1>
-        <p className="hidden sm:block text-gray-400 text-xs">
-          Level Up Your Competition
-        </p>
+        {!noHighlight && (
+          <p className="hidden sm:block text-gray-400 text-xs">
+            Level Up Your Competition
+          </p>
+        )}
       </Link>
     </div>
   );
