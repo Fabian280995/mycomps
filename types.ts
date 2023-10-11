@@ -68,6 +68,9 @@ export interface User {
   lastName: string;
   email: string;
   compIds: string[];
+  programs: TrainingsProgram[];
+  activeProgramId: string;
+  trainingsLogs: TrainingsLog[];
 }
 
 export interface TrainingsProgram {
