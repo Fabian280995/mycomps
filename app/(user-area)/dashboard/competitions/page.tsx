@@ -1,6 +1,13 @@
+import CompsBoard from "@/components/user-dashboard/comps-board";
+
 const CompetitionsPage = () => {
   return (
-    <div className="flex flex-col items-center w-full pt-12 min-h-screen bg-gray-50"></div>
+    <section className="w-full min-h-screen">
+      <h2 className="text-xl font-semibold text-gray-400">
+        Diese Wettkämpfe kommen für dich in Frage
+      </h2>
+      <CompsBoard />
+    </section>
   );
 };
 

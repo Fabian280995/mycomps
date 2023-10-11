@@ -8,7 +8,7 @@ import ExtendedUserButton from "./extended-user-button";
 const Sidebar = async () => {
   return (
     <>
-      <div className="fixed top-6 right-8">
+      <div className="fixed top-6 right-8 z-[1000]">
         <ExtendedUserButton />
       </div>
       <div className="fixed z-40 w-full md:static md:w-72 h-full bg-white flex flex-col p-6 gap-8 border-r justify-between">

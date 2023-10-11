@@ -28,6 +28,8 @@ const UserInfoProvider = ({ children }: { children: React.ReactNode }) => {
   const [userInfo, setUserInfo] = useState<User | undefined>(undefined);
   const { userId, getToken } = useAuth();
 
+  console.log("USER_INFO_PROVIDER: userId: ", userId);
+
   const getUserInfo = async () => {
     setIsLoading(true);
     try {

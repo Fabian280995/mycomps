@@ -7,15 +7,18 @@ import { Loader2 } from "lucide-react";
 
 const ExtendedUserButton = () => {
   const { userInfo, isLoading } = useUserInfo();
-  return (
+  return !isLoading ? (
     <motion.div
       key="user-button"
       initial={{ opacity: 0, scale: 0.6 }}
       animate={{ opacity: 1, scale: 1 }}
+      transition={{
+        delay: 0.2,
+        ease: "easeIn",
+      }}
       className={cn(
         "group flex items-center rounded-full border transform-gpu transition-all bg-white shadow-md border-gray-200",
-        "hover:bg-gray-100 h-12 cursor-pointer",
-        isLoading ? "w-12" : "w-fit"
+        "hover:bg-gray-100 h-12 cursor-pointer"
       )}
     >
       {userInfo ? (
@@ -30,7 +33,7 @@ const ExtendedUserButton = () => {
         <UserButton afterSignOutUrl="/" />
       </div>
     </motion.div>
-  );
+  ) : null;
 };
 
 export default ExtendedUserButton;

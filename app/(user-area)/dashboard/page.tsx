@@ -1,18 +1,12 @@
 import DashboardHeader from "@/components/user-dashboard/dashboard-header";
 import InfoBoard from "@/components/user-dashboard/info-board";
 
-const DashboardSetupPage = async ({
-  searchParams,
-}: {
-  searchParams: { [key: string]: string | string[] };
-}) => {
+const DashboardSetupPage = () => {
   return (
-    <>
-      <div className="flex flex-col items-center w-full min-h-screen ">
-        <DashboardHeader />
-        <InfoBoard />
-      </div>
-    </>
+    <section className="flex flex-col items-center">
+      <DashboardHeader />
+      <InfoBoard />
+    </section>
   );
 };
 
