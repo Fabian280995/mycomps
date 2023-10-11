@@ -38,8 +38,9 @@ const CompsList = ({ compIds }: { compIds: string[] }) => {
                   duration: 0.2,
                   delay: index * 0.1,
                 }}
+                key={index}
               >
-                <CompCardSceleton key={index} />
+                <CompCardSceleton />
               </motion.div>
             );
           if (res.error) return <div key={index}>Error!</div>;

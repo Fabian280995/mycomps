@@ -7,7 +7,7 @@ export const updateUserCompIds = async (
   const data = {
     compIds: compIds,
   };
-  const res = await fetch("http://localhost:3001/api/app-users/user", {
+  const res = await fetch("https://mycomps-cms.vercel.app/api/app-users/user", {
     method: "PATCH",
     headers: {
       Authorization: `Bearer ${jwtToken}`,

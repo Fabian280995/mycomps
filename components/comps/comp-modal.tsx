@@ -2,6 +2,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { motion } from "framer-motion";
 import {
+  Loader,
   Loader2,
   MapPin,
   Sparkle,
@@ -41,7 +42,7 @@ const CompetitionModal = ({ compId }: CompetitionModalProps) => {
     isLoading: loadingUserInfo,
     refetchUserInfo,
   } = useUserInfo();
-  const [loading, setLoading] = React.useState(true);
+  const [loading, setLoading] = React.useState(false);
   const [formattedCompetition, setFormattedCompetition] = React.useState<
     formattedCompetitionProps | undefined
   >(undefined);
@@ -130,7 +131,7 @@ const CompetitionModal = ({ compId }: CompetitionModalProps) => {
 
   return (
     <div
-      className="fixed inset-0 flex items-center justify-center z-[100]
+      className="fixed inset-0 flex items-center justify-center z-[10000]
     transition-all duration-500 ease-in-out 
     "
     >
@@ -178,10 +179,14 @@ const CompetitionModal = ({ compId }: CompetitionModalProps) => {
                 disabled={loadingUserInfo || !userInfo}
                 onClick={handleFavorite}
               >
-                {!isFavorite ? (
-                  <Sparkle className="w-4 h-4" />
+                {!loading ? (
+                  !isFavorite ? (
+                    <Sparkle className="w-4 h-4" />
+                  ) : (
+                    <Sparkles className="w-4 h-4 text-amber-200" />
+                  )
                 ) : (
-                  <Sparkles className="w-4 h-4 text-amber-200" />
+                  <Loader className="w-4 h-4 text-amber-200 animate-spin" />
                 )}
                 merken
               </button>

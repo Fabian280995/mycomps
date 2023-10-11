@@ -69,3 +69,32 @@ export interface User {
   email: string;
   compIds: string[];
 }
+
+export interface TrainingsProgram {
+  id: string;
+  name: string;
+  weeks: number;
+  sessions: Session[];
+  createdAt: string;
+}
+
+export interface Session {
+  id: string;
+  name: string;
+  exercises: Exercise[];
+  trainingsLogs: TrainingsLog[];
+  createdAt: string;
+}
+
+export interface Exercise {
+  id: string;
+  name: string;
+}
+
+export interface TrainingsLog {
+  id: string;
+  set: number;
+  repsDone: number;
+  usedWeight: number;
+  createdAt: string;
+}
