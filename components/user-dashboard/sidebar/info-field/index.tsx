@@ -10,7 +10,7 @@ const InfoField = () => {
   const pathname = usePathname();
 
   return (
-    <div className="flex-1 border border-gray-200 w-full h-full rounded-xl px-4 py-3 flex flex-col justify-between">
+    <div className="border border-gray-200 w-full h-full rounded-xl px-4 py-3 overflow-y-scroll no-scrollbar">
       {userInfo ? (
         !(pathname === "/dashboard/programs") ? (
           <ActivePlan programId={userInfo.activeProgramId} />
@@ -18,7 +18,7 @@ const InfoField = () => {
           <ProgramsNav />
         )
       ) : (
-        <div className="flex-1 flex justify-center items-center">
+        <div className="w-full h-full flex justify-center items-center">
           <span className="text-xs text-gray-200 text-center">
             Nutzerdaten noch nicht geladen.
           </span>

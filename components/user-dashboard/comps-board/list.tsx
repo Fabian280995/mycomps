@@ -2,7 +2,6 @@
 import CompCard from "@/components/comps/comp-card";
 import CompCardSceleton from "@/components/comps/comp-card-sceleton";
 import { useQueries } from "@tanstack/react-query";
-import React from "react";
 import { motion } from "framer-motion";
 
 const CompsList = ({ compIds }: { compIds: string[] }) => {

@@ -12,8 +12,8 @@ const Sidebar = async () => {
       <div className="fixed top-6 right-8 z-[1000]">
         <ExtendedUserButton />
       </div>
-      <div className="fixed z-40 w-full md:static md:w-72 h-full bg-white flex flex-col p-6 gap-8 border-r justify-between">
-        <div className="h-full w-full flex flex-col gap-2 items-center">
+      <div className="w-full md:w-72 h-screen bg-white p-6 border-r">
+        <div className="h-full w-full flex flex-col gap-4">
           <div className="group flex w-full items-center gap-1">
             <Link
               href="/"
@@ -24,15 +24,19 @@ const Sidebar = async () => {
             </Link>
             <Brand noHighlight />
           </div>
-          <InfoField />
-          <Navigation />
-        </div>
-        <button
-          className="w-full px-6 py-4 bg-teal-400 text-center text-white rounded-sm active:scale-95
+          <div className="flex-1 w-full overflow-hidden">
+            <InfoField />
+          </div>
+          <div className="w-full">
+            <Navigation />
+          </div>
+          <button
+            className="w-full px-6 py-4 bg-teal-400 text-center text-white rounded-sm active:scale-95
         transition-all hover:bg-teal-500"
-        >
-          Neuer Trainingsplan
-        </button>
+          >
+            Neuer Trainingsplan
+          </button>
+        </div>
       </div>
     </>
   );

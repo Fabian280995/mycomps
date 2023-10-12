@@ -1,17 +1,17 @@
 "use client";
-import { getActiveProgram } from "@/lib/actions/programs.actions";
+import { getProgramById } from "@/lib/actions/programs.actions";
 import { TrainingsProgram } from "@/types";
 import { useAuth } from "@clerk/nextjs";
 import { useQuery } from "@tanstack/react-query";
 
 const ActivePlan = ({ programId }: { programId: string }) => {
   const { getToken } = useAuth();
-  const { data, error, isLoading } = useQuery<TrainingsProgram>(
+  const { data, isLoading } = useQuery<TrainingsProgram>(
     ["programs", programId],
     async () => {
       try {
         const token = await getToken();
-        const data = await getActiveProgram(token!, programId);
+        const data = await getProgramById(token!, programId);
         return data;
       } catch (error: any) {
         console.log(error);
@@ -21,7 +21,8 @@ const ActivePlan = ({ programId }: { programId: string }) => {
   );
 
   return (
-    <>
+    <div className="flex flex-col w-full h-full justify-between gap-2">
+      <h5 className="text-gray-300 text-base font-semibold">Aktiver Plan</h5>
       {isLoading ? (
         <div className="flex-1 flex justify-center items-center">
           <span className="text-xs text-gray-200 text-center">
@@ -29,24 +30,15 @@ const ActivePlan = ({ programId }: { programId: string }) => {
           </span>
         </div>
       ) : data ? (
-        <div className=""></div>
+        <div className="flex-1 w-full flex flex-col">
+          <h6 className="text-gray-700 text-base font-semibold">{data.name}</h6>
+        </div>
       ) : (
-        <>
-          <h5 className="text-gray-400 text-base font-semibold">
-            Aktiver Plan
-          </h5>
-          <div className="flex-1 flex justify-center items-center">
-            <span className="text-xs text-gray-200 text-center">
-              Du hast noch keine Trainingspläne.
-            </span>
-          </div>
-          {/* 
-          <div className="w-full h-2 bg-gray-200 rounded-full overflow-hidden shadow-md">
-            <div className="w-3/4 h-full bg-teal-400"></div>
-          </div> */}
-        </>
+        <span className="text-xs text-gray-200 text-center">
+          Du hast noch keinen Trainingsplan ausgewählt.
+        </span>
       )}
-    </>
+    </div>
   );
 };
 
