@@ -10,13 +10,17 @@
   },
   "dependencies": {
     "@clerk/nextjs": "^4.25.1",
+    "@hello-pangea/dnd": "^16.3.0",
     "@mantine/hooks": "^7.0.0",
+    "@react-google-maps/api": "^2.19.2",
     "@tanstack/react-query": "^4.35.3",
     "@types/node": "20.5.7",
     "@types/react": "18.2.21",
+    "@types/react-beautiful-dnd": "^13.1.5",
     "@types/react-dom": "18.2.7",
     "@vercel/analytics": "^1.0.2",
     "autoprefixer": "10.4.15",
+    "clsx": "^2.0.0",
     "eslint-config-next": "^13.5.2",
     "framer-motion": "^10.16.4",
     "lucide-react": "^0.263.1",
@@ -24,10 +28,13 @@
     "postcss": "^8.4.31",
     "query-string": "^8.1.0",
     "react": "^18.2.0",
+    "react-beautiful-dnd": "^13.1.1",
     "react-dom": "^18.2.0",
     "react-error-boundary": "^4.0.11",
+    "tailwind-merge": "^1.14.0",
     "tailwindcss": "3.3.3",
     "typescript": "5.2.2",
+    "use-places-autocomplete": "^4.0.1",
     "zustand": "^4.4.1"
   }
 }

@@ -1,10 +1,9 @@
 import { cn } from "@/lib/utils";
 import Link from "next/link";
-import React from "react";
 
 const Brand = ({ noHighlight }: { noHighlight?: boolean }) => {
   return (
-    <div className="flex justify-between items-center sm:items-end transition-all duration-500 ease-in-out">
+    <div className="flex items-center transition-all duration-500 ease-in-out">
       <Link href="/">
         <h1
           className={cn(

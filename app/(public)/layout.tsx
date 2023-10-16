@@ -8,11 +8,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <main>
+    <main className="h-screen flex flex-col">
       <MainHeader />
       {children}
-      <BottomScrollIndicator />
-      <Footer />
     </main>
   );
 }

@@ -11,7 +11,7 @@ const ProgramsPage = ({
     ? (searchParams.program_id as string)
     : undefined;
   return (
-    <section className="w-full">
+    <section className="flex-1 w-full overflow-y-auto bg-gray-50 py-6 sm:py-8 lg:py-10 xl:py-12 flex flex-col items-center">
       <ProgramBoard programId={programId} />
     </section>
   );

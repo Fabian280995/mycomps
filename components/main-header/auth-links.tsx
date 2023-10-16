@@ -1,5 +1,4 @@
 "use client";
-
 import {
   ClerkLoading,
   SignInButton,
@@ -9,10 +8,18 @@ import {
 } from "@clerk/nextjs";
 import { User2 } from "lucide-react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 const AuthLinks = () => {
+  const pathanme = usePathname();
   return (
     <div className="flex items-center gap-4">
+      <Link
+        href={pathanme === "/comps-map" ? "/" : "/comps-map"}
+        className="hover:underline transition-all duration-150 text-gray-400 font-semibold text-base"
+      >
+        {pathanme === "/comps-map" ? "Zurück zur Startseite" : "Zur Karte"}
+      </Link>
       <SignedIn>
         <Link
           href="/dashboard"

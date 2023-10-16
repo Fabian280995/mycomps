@@ -20,7 +20,7 @@ const InfoBoard = () => {
           href="/dashboard/programs"
           limit={1} // Anzahl maximal möglicher Trainingspläne
           icon={<Dumbbell className="w-6 h-6" />}
-          count={undefined}
+          count={userInfo?.programs?.length}
         />
         <CountInfoCard
           title="Einheiten"

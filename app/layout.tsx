@@ -1,11 +1,15 @@
 import { TanstackProvider } from "@/providers/query-client.provider";
 import "./globals.css";
+import { Baloo_Paaji_2, Inter, Onest, Raleway } from "next/font/google";
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
 import { Analytics } from "@vercel/analytics/react";
 import { ClerkProvider } from "@clerk/nextjs";
+import MapLinkProvider from "@/providers/map-link.provider";
+import UserInfoProvider from "@/providers/user-info.provider";
 
-const inter = Inter({ subsets: ["latin"] });
+const font = Raleway({
+  subsets: ["latin"],
+});
 
 export const metadata: Metadata = {
   title: "mycomps",
@@ -26,8 +30,11 @@ export default function RootLayout({
           },
         }}
       >
-        <body className={`${inter.className} no-scrollbar`}>
-          <TanstackProvider>{children}</TanstackProvider>
+        <body className={`${font.className} no-scrollbar`}>
+          <TanstackProvider>
+            <UserInfoProvider>{children}</UserInfoProvider>
+            <MapLinkProvider />
+          </TanstackProvider>
           <Analytics />
         </body>
       </ClerkProvider>

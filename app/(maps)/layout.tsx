@@ -1,7 +1,6 @@
-import BottomScrollIndicator from "@/components/bottom-scroll-indicator";
-import Footer from "@/components/footer";
 import MainHeader from "@/components/main-header";
 import UserInfoProvider from "@/providers/user-info.provider";
+import { LoadScriptNext } from "@react-google-maps/api";
 
 export default function RootLayout({
   children,
@@ -9,11 +8,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <main>
+    <main className="h-screen flex flex-col">
       <MainHeader />
       {children}
-      <BottomScrollIndicator />
-      <Footer />
     </main>
   );
 }

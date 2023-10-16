@@ -78,20 +78,29 @@ export interface TrainingsProgram {
   name: string;
   weeks: number;
   sessions: Session[];
-  createdAt: string;
+  createdAt: Date;
 }
 
 export interface Session {
   id: string;
+  index: number;
   name: string;
-  exercises: Exercise[];
+  exercises: SessionExercise[];
   trainingsLogs: TrainingsLog[];
-  createdAt: string;
+  createdAt: Date;
+}
+
+export interface SessionExercise {
+  id: string;
+  index: number;
+  exerciseData: Exercise;
+  createdAt: Date;
 }
 
 export interface Exercise {
   id: string;
   name: string;
+  trainingsLogs: TrainingsLog[];
 }
 
 export interface TrainingsLog {
@@ -99,5 +108,5 @@ export interface TrainingsLog {
   set: number;
   repsDone: number;
   usedWeight: number;
-  createdAt: string;
+  createdAt: Date;
 }

@@ -8,6 +8,8 @@ import React, { createContext, useState } from "react";
 interface UserInfoContextProps {
   isLoading: boolean;
   userInfo: User | undefined;
+  userLocation: { lat: number; lng: number } | undefined;
+  refetchUserLocation: () => void;
   setUserInfo: React.Dispatch<React.SetStateAction<User | undefined>>;
   refetchUserInfo: () => void;
 }
@@ -15,6 +17,8 @@ interface UserInfoContextProps {
 const UserInfoContext = createContext<UserInfoContextProps>({
   isLoading: false,
   userInfo: undefined,
+  userLocation: undefined,
+  refetchUserLocation: () => {},
   setUserInfo: () => {},
   refetchUserInfo: () => {},
 });
@@ -26,6 +30,9 @@ export const useUserInfo = () => {
 const UserInfoProvider = ({ children }: { children: React.ReactNode }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [userInfo, setUserInfo] = useState<User | undefined>(undefined);
+  const [userLocation, setUserLocation] = useState<
+    { lat: number; lng: number } | undefined
+  >(undefined);
   const { userId, getToken } = useAuth();
 
   const getUserInfo = async () => {
@@ -43,15 +50,43 @@ const UserInfoProvider = ({ children }: { children: React.ReactNode }) => {
     }
   };
 
+  const getUserLocation = () => {
+    if (!navigator.geolocation) {
+      return;
+    }
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        setUserLocation({
+          lat: position.coords.latitude,
+          lng: position.coords.longitude,
+        });
+      },
+      (err) => {
+        console.log(err);
+      }
+    );
+  };
+
   React.useEffect(() => {
     if (userId) {
       getUserInfo();
     }
   }, [userId]);
 
+  React.useEffect(() => {
+    getUserLocation();
+  }, []);
+
   return (
     <UserInfoContext.Provider
-      value={{ isLoading, userInfo, setUserInfo, refetchUserInfo: getUserInfo }}
+      value={{
+        isLoading,
+        userInfo,
+        userLocation,
+        refetchUserLocation: getUserLocation,
+        setUserInfo,
+        refetchUserInfo: getUserInfo,
+      }}
     >
       {children}
     </UserInfoContext.Provider>
