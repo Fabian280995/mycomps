@@ -57,7 +57,7 @@ const CompetitionsList = ({
     fetchNextPage,
     isFetching: loading,
   } = useInfiniteQuery(
-    ["query", { sportId, startDate, searchTerm }],
+    ["competitions", { sportId, startDate, searchTerm }],
     async ({ pageParam = 1 }) => {
       const response = await getCompetitions({
         page: pageParam,

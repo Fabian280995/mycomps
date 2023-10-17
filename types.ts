@@ -54,6 +54,8 @@ export interface Address {
   city: string;
   state: string;
   country: string;
+  lat: number;
+  lng: number;
 }
 
 export interface Image {
