@@ -1,11 +1,21 @@
 "use client";
 import getCompetitions from "@/lib/actions/getCompetitions";
-import { MarkerF } from "@react-google-maps/api";
+import { Competition } from "@/types";
+import { InfoWindowF, MarkerClustererF, MarkerF } from "@react-google-maps/api";
 import { useQuery } from "@tanstack/react-query";
+import { Award, CalendarDays } from "lucide-react";
 import { useState } from "react";
 
-const CompMarkers = () => {
+interface Props {
+  map: google.maps.Map | null;
+}
+
+const CompMarkers = ({ map }: Props) => {
   const [nothingFound, setNothingFound] = useState(false);
+  const [selectedComp, setSelectedComp] = useState<Competition | null>(null);
+  const [selectedPos, setSelectedPos] = useState<google.maps.LatLng | null>(
+    null
+  );
   const { data, isLoading } = useQuery(
     ["competitions" /* , { sportId, startDate, searchTerm } */],
 
@@ -18,8 +28,47 @@ const CompMarkers = () => {
       return response;
     }
   );
+
+  const centerOnMarker = (latlng: google.maps.LatLng) => {
+    if (map) {
+      map.panTo(latlng);
+      map.setZoom(14);
+    }
+  };
+
   return (
     <>
+      {selectedPos ? (
+        <InfoWindowF
+          position={selectedPos}
+          onCloseClick={() => {
+            setSelectedComp(null);
+            setSelectedPos(null);
+          }}
+          options={{
+            pixelOffset: new google.maps.Size(0, -30),
+            ariaLabel: "Wettkampf",
+            maxWidth: 320,
+          }}
+        >
+          {selectedComp ? (
+            <div className="flex flex-col gap-1">
+              <h2 className="text-lg font-semibold truncate">
+                {selectedComp.name}
+              </h2>
+              <p className="text-sm text-gray-500 flex items-center font-semibold">
+                <Award size={20} className="mr-1" />
+                {selectedComp.sport.name}
+              </p>
+              <p className="text-sm text-gray-500 flex items-center font-semibold">
+                <CalendarDays size={20} className="mr-1" />
+                {new Date(selectedComp.startDate).toLocaleDateString()} -{" "}
+                {new Date(selectedComp.endDate).toLocaleDateString()}
+              </p>
+            </div>
+          ) : null}
+        </InfoWindowF>
+      ) : null}
       {!isLoading && data
         ? data.data.map((comp) => (
             <MarkerF
@@ -32,16 +81,13 @@ const CompMarkers = () => {
                 url: "/comp-location.png",
                 scaledSize: new google.maps.Size(18, 18),
               }}
-            >
-              <div className="flex flex-col items-center justify-center">
-                <p className="text-sm font-semibold text-gray-800">
-                  {comp.location.address.city}
-                </p>
-                <p className="text-xs font-semibold text-gray-800">
-                  {comp.location.address.street}
-                </p>
-              </div>
-            </MarkerF>
+              title={comp.name}
+              onClick={(e: any) => {
+                centerOnMarker(e.latLng);
+                setSelectedComp(comp);
+                setSelectedPos(e.latLng);
+              }}
+            />
           ))
         : null}
     </>

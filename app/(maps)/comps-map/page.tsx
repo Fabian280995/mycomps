@@ -1,6 +1,4 @@
 import CompsMap from "@/components/maps/comps-map";
-import { LoadScriptNext } from "@react-google-maps/api";
-import React from "react";
 
 const CompsMapPage = () => {
   return (

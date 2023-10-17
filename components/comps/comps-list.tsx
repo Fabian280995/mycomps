@@ -121,9 +121,13 @@ const CompetitionsList = ({
               return null;
             }
             return (
-              <motion.section layout key={month} className="padding-x">
+              <motion.section
+                layout
+                key={month}
+                className="padding-x space-y-4 py-4"
+              >
                 <MonthIndicator month={month} />
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-6 py-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-6">
                   {compsByMonth[month].map((comp) => {
                     if (lastCompId === comp.id) {
                       return (

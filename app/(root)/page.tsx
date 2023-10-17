@@ -1,6 +1,5 @@
 import CompetitionsOverview from "@/components/comps-overview";
 import ScrollUp from "@/components/ui/scroll-up";
-import { auth } from "@clerk/nextjs";
 
 export default async function HeroPage({
   searchParams,
