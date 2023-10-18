@@ -1,4 +1,4 @@
-import CompsMap from "@/components/maps/comps-map";
+import CompsMap from "@/components/comps-map";
 
 const CompsMapPage = () => {
   return (

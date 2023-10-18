@@ -4,10 +4,9 @@ import queryString from "query-string";
 const URL = `${process.env.NEXT_PUBLIC_API_URL}/competitions`;
 
 export interface CompetitionsQuery {
-  locationId?: string;
   startDate?: Date;
-  organizerId?: string;
-  sportIds?: string | string[];
+  sportId?: string;
+  searchTerm?: string;
   page?: number;
   limit?: number;
   lat?: number;
@@ -15,7 +14,33 @@ export interface CompetitionsQuery {
   radius?: number;
 }
 
-const getCompetitions = async (
+export const getCompetitionsByLocation = async (
+  query: CompetitionsQuery
+): Promise<Competition[]> => {
+  const options = {
+    method: "GET",
+  };
+
+  if (!query.lat || !query.lng || !query.radius)
+    throw new Error("Missing location parameters");
+
+  const url = queryString.stringifyUrl({
+    url: `${URL}/locations`,
+    query: {
+      sportId: query.sportId,
+      startDate: query.startDate?.toString(),
+      searchTerm: query.searchTerm,
+      lat: query.lat,
+      lng: query.lng,
+      radius: query.radius,
+    },
+  });
+
+  const res = await fetch(url, options);
+  return res.json();
+};
+
+export const getCompetitions = async (
   query: CompetitionsQuery
 ): Promise<{
   pagination: {
@@ -23,40 +48,21 @@ const getCompetitions = async (
   };
   data: Competition[];
 }> => {
-  let url;
   const options = {
     method: "GET",
   };
 
-  if (query.lat && query.lng && query.radius) {
-    url = queryString.stringifyUrl({
-      url: URL,
-      query: {
-        locationId: query.locationId,
-        organizerId: query.organizerId,
-        sportId: query.sportIds,
-        startDate: query.startDate?.toString(),
-        lat: query.lat,
-        lng: query.lng,
-        radius: query.radius,
-      },
-    });
-  } else {
-    url = queryString.stringifyUrl({
-      url: URL,
-      query: {
-        locationId: query.locationId,
-        organizerId: query.organizerId,
-        sportId: query.sportIds,
-        startDate: query.startDate?.toString(),
-        page: query.page,
-        limit: query.limit,
-      },
-    });
-  }
+  const url = queryString.stringifyUrl({
+    url: URL,
+    query: {
+      sportId: query.sportId,
+      startDate: query.startDate?.toString(),
+      searchTerm: query.searchTerm,
+      page: query.page,
+      limit: query.limit,
+    },
+  });
 
   const res = await fetch(url, options);
   return res.json();
 };
-
-export default getCompetitions;
