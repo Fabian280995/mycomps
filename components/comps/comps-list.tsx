@@ -59,13 +59,17 @@ const CompetitionsList = ({
   } = useInfiniteQuery(
     ["competitions", { sportId, startDate, searchTerm }],
     async ({ pageParam = 1 }) => {
-      const response = await getCompetitions({
-        page: pageParam,
-        query: { sportId, startDate, searchTerm },
-      });
-      if (response.data.length === 0) setNothingFound(true);
-      else setNothingFound(false);
-      return response;
+      try {
+        const response = await getCompetitions({
+          page: pageParam,
+          query: { sportId, startDate, searchTerm },
+        });
+        if (response.data.length === 0) setNothingFound(true);
+        else setNothingFound(false);
+        return response;
+      } catch (error) {
+        console.error(error);
+      }
     },
     {
       getNextPageParam: (_, pages) => {
@@ -101,7 +105,7 @@ const CompetitionsList = ({
 
   return (
     <div className="my-12 space-y-24 flex flex-col justify-center items-center">
-      <div>
+      <section>
         {loading && (
           <div className="w-full flex flex-col items-center justify-center mt-12 mb-6">
             <Loader size={24} className="animate-spin text-gray-300" />
@@ -121,7 +125,7 @@ const CompetitionsList = ({
               return null;
             }
             return (
-              <motion.section
+              <motion.article
                 layout
                 key={month}
                 className="padding-x space-y-4 py-4"
@@ -139,16 +143,16 @@ const CompetitionsList = ({
                     return <CompCard key={comp.id} comp={comp} />;
                   })}
                 </div>
-              </motion.section>
+              </motion.article>
             );
           })}
-      </div>
+      </section>
       {!canNextPage ? (
-        <div className="w-full flex justify-center mt-12">
+        <footer className="w-full flex justify-center mt-12">
           <div className="bg-white rounded-full px-6 py-3 text-gray-400">
             Du bist am Ende angekommen!
           </div>
-        </div>
+        </footer>
       ) : null}
     </div>
   );

@@ -1,6 +1,6 @@
 "use client";
-import { GoogleMap, MarkerF } from "@react-google-maps/api";
-import { MapPinIcon } from "lucide-react";
+import { Circle, GoogleMap, MarkerF } from "@react-google-maps/api";
+import { MapPinIcon, Minus, Plus } from "lucide-react";
 import CompMarkers from "./comp-markers";
 import PlacesAutocomplete from "./places-autocomplete";
 import { useCallback, useEffect, useState } from "react";
@@ -91,6 +91,26 @@ const MapView: React.FC<MapViewProps> = ({
         >
           <MapPinIcon size={24} className="text-gray-600" />
         </button>
+        <div className="absolute top-1/2 left-4 transform -translate-y-1/2 flex gap-2">
+          <button
+            className="
+          bg-white rounded-full shadow-md border w-12 h-12 flex items-center justify-center
+          focus:outline-none active:scale-90 transition-all duration-200"
+            onClick={() => handlePush(selectedLocation, radius + 10)}
+          >
+            <Plus size={24} className="text-gray-600" />
+          </button>
+          <button
+            className="
+          bg-white rounded-full shadow-md border w-12 h-12 flex items-center justify-center
+          focus:outline-none active:scale-90 transition-all duration-200"
+            onClick={() =>
+              handlePush(selectedLocation, radius === 10 ? 10 : radius - 10)
+            }
+          >
+            <Minus size={24} className="text-gray-600" />
+          </button>
+        </div>
       </div>
 
       {googleLoaded ? (
@@ -115,11 +135,24 @@ const MapView: React.FC<MapViewProps> = ({
             />
           )}
           {selectedLocation && radius ? (
-            <CompMarkers
-              map={map}
-              location={selectedLocation}
-              radius={radius}
-            />
+            <>
+              <Circle
+                center={selectedLocation}
+                radius={radius * 1000}
+                options={{
+                  strokeColor: "#3182ce",
+                  strokeOpacity: 0.8,
+                  strokeWeight: 2,
+                  fillColor: "#3182ce",
+                  fillOpacity: 0.35,
+                }}
+              />
+              <CompMarkers
+                map={map}
+                location={selectedLocation}
+                radius={radius}
+              />
+            </>
           ) : null}
         </>
       ) : (

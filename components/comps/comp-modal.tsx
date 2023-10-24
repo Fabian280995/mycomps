@@ -7,22 +7,20 @@ import {
   MapPin,
   Sparkle,
   Sparkles,
-  Star,
   User2,
-  X,
+  X
 } from "lucide-react";
 import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
 import React, { useEffect } from "react";
 
 import getCompetition from "@/lib/actions/getCompetition";
-import { Competition } from "@/types";
-import EnrollmentLink from "./enrollment-link";
-import { useUserInfo } from "@/providers/user-info.provider";
-import { cn } from "@/lib/utils";
-import { useAuth } from "@clerk/nextjs";
-import { get } from "http";
 import { updateUserCompIds } from "@/lib/actions/user.actions";
+import { cn } from "@/lib/utils";
+import { useUserInfo } from "@/providers/user-info.provider";
+import { Competition } from "@/types";
+import { useAuth } from "@clerk/nextjs";
+import EnrollmentLink from "./enrollment-link";
 
 interface CompetitionModalProps {
   compId: string;
@@ -191,8 +189,11 @@ const CompetitionModal = ({ compId }: CompetitionModalProps) => {
                 merken
               </button>
               <div className="flex gap-4 items-center justify-end text-gray-500">
-                <a href={formattedCompetition.organizerLink}>
-                  <User2 className="w-6 h-6 active:scale-90 transition-all hover:text-gray-700" />
+                <a
+                  href={formattedCompetition.organizerLink}
+                  className="flex items-center group overflow-hidden transition-all"
+                >
+                  <User2 className="w-6 h-6 active:scale-90 transition-all group-hover:text-gray-700" />
                 </a>
                 <a href={formattedCompetition.googleMapsLink}>
                   <MapPin className="w-6 h-6 active:scale-90 transition-all hover:text-gray-700" />

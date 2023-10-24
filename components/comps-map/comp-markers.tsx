@@ -48,7 +48,7 @@ const CompMarkers = ({ map, location, radius }: Props) => {
 
   useEffect(() => {
     console.log("data", data);
-    if (!data?.length) {
+    if (!data?.length && !isLoading) {
       setNothingFound(true);
     } else {
       setNothingFound(false);
@@ -108,18 +108,27 @@ const CompMarkers = ({ map, location, radius }: Props) => {
             }}
           />
         ))
-      ) : nothingFound ? (
-        <div className="absolute inset-0 bg-black/40 flex flex-col items-center justify-center">
-          <Loader2 size={48} className="text-teal-400 animate-spin" />
-          <p className="text-white text-lg font-semibold">
-            Wettkämpfe werden geladen...
-          </p>
-        </div>
       ) : (
-        <div className="absolute inset-0 bg-black/40 flex flex-col items-center justify-center">
-          <p className="text-white text-lg font-semibold">
-            Keine Wettkämpfe gefunden...
-          </p>
+        <div
+          className="
+          absolute bottom-6 flex flex-col items-center justify-center bg-white rounded-3xl
+          p-4 mx-auto left-0 right-0 max-w-max shadow-lg
+        "
+        >
+          {nothingFound ? (
+            <div className="w-full flex flex-col items-center justify-center">
+              <p className="text-gray-400 font-semibold text-lg">
+                Tut uns leid, diese Suche hat keine Ergebnisse geliefert...
+              </p>
+            </div>
+          ) : (
+            <div className="w-full flex items-center justify-center">
+              <Loader2 size={24} className="text-teal-400 animate-spin" />
+              <p className="text-gray-400 font-semibold text-lg ml-4">
+                Wettkämpfe werden geladen...
+              </p>
+            </div>
+          )}
         </div>
       )}
     </>

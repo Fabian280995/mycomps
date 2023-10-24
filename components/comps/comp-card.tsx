@@ -35,15 +35,15 @@ const CompCard = ({ comp }: Props) => {
   const organizerLink = comp.organizer.url;
 
   return (
-    <div
+    <button
       className="w-[300px] h-[386px] max-w-xs"
       onClick={() => router.push(`?competition_id=${comp.id}`)}
     >
-      <div
+      <article
         className="relative w-full h-full flex flex-col bg-white border rounded-3xl overflow-hidden
         cursor-pointer hover:scale-[1.02] hover:-translate-y-2 hover:shadow-lg transition-all duration-150"
       >
-        <div className="relative group w-full aspect-[3/2] overflow-hidden bg-gray-200">
+        <header className="relative group w-full aspect-[3/2] overflow-hidden bg-gray-200">
           <Image
             src={comp.logo.url}
             alt={comp.name}
@@ -56,52 +56,45 @@ const CompCard = ({ comp }: Props) => {
             onLoadingComplete={() => setLoading(false)}
           />
           {comp.logo.creatorLink ? (
-            <a
-              href={comp.logo.creatorLink}
+            <span
               className="absolute bottom-0 right-0 left-0 w-full px-4 py-2 
                truncate text-white/5 group-hover:text-white/70 transition-all duration-150"
             >
               Creator: {comp.logo.creatorLink}
-            </a>
+            </span>
           ) : null}
-        </div>
-        <div className="px-4 py-2 flex flex-col space-y-2">
-          <div className="flex">
+        </header>
+        <ul className="px-4 py-2 flex flex-col space-y-2">
+          <li className="flex">
             <Link
               href={`/home?competition_id=${comp.id}`}
               className="text-lg font-semibold text-zinc-800 truncate"
             >
               {comp.name}
             </Link>
-          </div>
-          <div className="flex flex-col gap-y-2 justify-around">
-            <a
-              href={organizerLink}
-              className="flex items-center gap-x-2 hover:underline text-gray-500 hover:text-gray-900"
-            >
-              <div className="min-w-6">
+          </li>
+          <li className="flex flex-col gap-y-2 justify-around">
+            <p className="flex items-center gap-x-2 text-gray-500">
+              <strong className="min-w-6">
                 <User2 className="w-5 h-5" />
-              </div>
-              <p className="text-md truncate ">{comp.organizer.name}</p>
-            </a>
-            <a
-              href={googleMapsLink}
-              className="flex items-center gap-x-2 hover:underline text-gray-500 hover:text-gray-900"
-            >
-              <div className="min-w-6">
+              </strong>
+              <span className="text-md truncate">{comp.organizer.name}</span>
+            </p>
+            <p className="flex items-center gap-x-2 text-gray-500">
+              <strong className="min-w-6">
                 <MapPin className="w-5 h-5" />
-              </div>
-              <p className="text-md truncate ">{address}</p>
-            </a>
-            <div className="flex items-center gap-x-2 text-gray-500">
-              <div className="min-w-6">
+              </strong>
+              <span className="text-md truncate">{address}</span>
+            </p>
+            <p className="flex items-center gap-x-2 text-gray-500">
+              <strong className="min-w-6">
                 <Calendar className="w-5 h-5" />
-              </div>
-              <p className="text-md truncate">{date}</p>
-            </div>
-          </div>
+              </strong>
+              <span className="text-md truncate">{date}</span>
+            </p>
+          </li>
           <EnrollmentLink enrollmentLink={comp.enrollmentLink} />
-        </div>
+        </ul>
         {false ? (
           <div className="absolute top-2 left-2 rounded-full p-2">
             <Flame className="w-6 h-6 text-amber-400" />
@@ -126,8 +119,8 @@ const CompCard = ({ comp }: Props) => {
             <Sparkle className="w-6 h-6 text-gray-200/40" />
           )}
         </div>
-      </div>
-    </div>
+      </article>
+    </button>
   );
 };
 
